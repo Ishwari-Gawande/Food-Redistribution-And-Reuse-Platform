@@ -18,4 +18,9 @@ private MatchServiceImpl matchService;
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 	    return ResponseEntity.ok(matchService.findById(id));
 	}
+	
+	@GetMapping
+	public ResponseEntity<?> findAllMatches() {
+	    return ResponseEntity.ok(matchService.findAllMatches());
+	}
 }

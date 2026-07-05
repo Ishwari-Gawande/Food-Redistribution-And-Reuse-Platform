@@ -3,6 +3,7 @@ package com.food.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.food.DTO.NotificationDTO;
 import com.food.Exception.ResourceNotFoundException;
@@ -11,7 +12,10 @@ import com.food.entities.User;
 import com.food.repository.NotificationRepository;
 import com.food.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 
+@Service
+@Transactional
 public class NotificationServiceImpl implements NotificationService {
 @Autowired 
 private UserRepository userRepo;

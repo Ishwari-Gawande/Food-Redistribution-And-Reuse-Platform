@@ -1,5 +1,7 @@
 package com.food.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,12 @@ private MatchRepository matchRepo;
 		   return matchRepo.findById(id)
 		            .orElseThrow(() ->
 		                    new ResourceNotFoundException("Match not found"));
+	}
+
+	@Override
+	public List<Matches> findAllMatches() {
+		
+		return matchRepo.findAll();
 	}
 
 }
