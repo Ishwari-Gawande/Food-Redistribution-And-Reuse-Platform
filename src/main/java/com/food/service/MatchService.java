@@ -7,4 +7,5 @@ import com.food.entities.Matches;
 public interface MatchService {
 public Matches findById(Long id);
 public List<Matches> findAllMatches();
+public List<Matches> findPendingMatches();
 }

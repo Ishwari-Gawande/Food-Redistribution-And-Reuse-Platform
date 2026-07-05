@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.Matches;
 import com.food.repository.MatchRepository;
+import com.food.repository.MatchesRepository;
 
 import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class MatchServiceImpl implements MatchService {
 @Autowired
-private MatchRepository matchRepo;
+private MatchesRepository matchRepo;
 	
 	@Override
 	public Matches findById(Long id) {
@@ -27,6 +28,11 @@ private MatchRepository matchRepo;
 	public List<Matches> findAllMatches() {
 		
 		return matchRepo.findAll();
+	}
+
+	@Override
+	public List<Matches> findPendingMatches() {
+		return matchRepo.findByStatus("PENDING");
 	}
 
 }

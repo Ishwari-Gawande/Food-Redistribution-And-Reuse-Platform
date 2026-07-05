@@ -2,10 +2,10 @@ package com.food.service;
 
 import java.util.List;
 
-<<<<<<< HEAD
+
 import org.springframework.beans.factory.annotation.Autowired;
-=======
->>>>>>> 3d87fabacb049dc317e1ffad3813623d4f1b010f
+
+
 import org.springframework.stereotype.Service;
 
 import com.food.DTO.NotificationDTO;
@@ -16,22 +16,18 @@ import com.food.repository.NotificationRepository;
 import com.food.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
-<<<<<<< HEAD
 
-@Service
-@Transactional
-=======
+
 import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
->>>>>>> 3d87fabacb049dc317e1ffad3813623d4f1b010f
+
 public class NotificationServiceImpl implements NotificationService {
-
-	private final UserRepository userRepo;
-
-	private final NotificationRepository notificationRepo;
+@Autowired
+	private  UserRepository userRepo;
+@Autowired
+	private  NotificationRepository notificationRepo;
 
 	@Override
 	public String sendNotification(NotificationDTO request) {
