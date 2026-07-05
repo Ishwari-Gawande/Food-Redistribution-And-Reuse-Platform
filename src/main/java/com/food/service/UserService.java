@@ -8,15 +8,16 @@ import com.food.entities.User;
 public interface UserService {
 
 	public String addNewUser(UserDTO request);
+
 	public User findById(Long id);
-	
-	public List<User>findAllUsers();
-	
+
+	public List<User> findAllUsers();
+
 	public User findByEmail(String email);
-	
+
 	public String updateUser(Long id, UserDTO request);
-	
+
 	public String deleteUser(Long id);
-	
+
 	String updateProfile(UserDTO request);
 }

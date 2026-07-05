@@ -1,6 +1,5 @@
 package com.food.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.food.DTO.ForgetPasswordDTO;
@@ -12,40 +11,44 @@ import com.food.entities.User;
 import com.food.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
-public class AuthServiceImpl implements AuthService{
-@Autowired private UserRepository userRepo;
-	
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService {
+
+	private final UserRepository userRepo;
+
 	@Override
 	public String register(RegisterDTO registerRequest) {
 
-		if(userRepo.existsByEmail(registerRequest.getEmail())) {
+		if (userRepo.existsByEmail(registerRequest.getEmail())) {
 			return "Email already exists";
 		}
-		
-		User user=new User();
+
+		User user = new User();
 		user.setName(registerRequest.getName());
 		user.setEmail(registerRequest.getEmail());
 		user.setPasswordHash(registerRequest.getPassword());
 		user.setPhone(registerRequest.getPhone());
-		user.setAccountType(registerRequest.getAccountType());		 
+		user.setAccountType(registerRequest.getAccountType());
 		user.setAddress(registerRequest.getAddress());
-	        user.setCity(registerRequest.getCity());
-	       
-	        user.setStatus("ACTIVE");
-	        
-	        userRepo.save(user);
-	        
-		 return "Registration Successfull";
+		user.setCity(registerRequest.getCity());
+
+		user.setStatus("ACTIVE");
+
+		userRepo.save(user);
+
+		return "Registration Successfull";
 	}
 
 	@Override
 	public String logIn(LoginDTO loginRequest) {
-		User user=userRepo.findByEmail(loginRequest.getEmail()).orElseThrow(()->new ResourceNotFoundException("User not found"));
-		
-		if(!user.getPasswordHash().equals(loginRequest.getPassword())){
+		User user = userRepo.findByEmail(loginRequest.getEmail())
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+		if (!user.getPasswordHash().equals(loginRequest.getPassword())) {
 			throw new ResourceNotFoundException("Invalid Password");
 		}
 		return "Login Successfull";
@@ -53,7 +56,7 @@ public class AuthServiceImpl implements AuthService{
 
 	@Override
 	public String forgotPassword(ForgetPasswordDTO request) {
-		if(!userRepo.existsByEmail(request.getEmail())) {
+		if (!userRepo.existsByEmail(request.getEmail())) {
 			return "Email not found";
 		}
 		return "Email verified";
@@ -61,12 +64,12 @@ public class AuthServiceImpl implements AuthService{
 
 	@Override
 	public String resetPassword(ResetPasswordDTO request) {
-		User user=userRepo.findByEmail(request.getEmail()).orElseThrow(()->new ResourceNotFoundException("Email not found"));
-		
+		User user = userRepo.findByEmail(request.getEmail())
+				.orElseThrow(() -> new ResourceNotFoundException("Email not found"));
+
 		user.setPasswordHash(request.getNewPassword());
 		userRepo.save(user);
 		return "Password reset successfully";
 	}
 
-	
 }

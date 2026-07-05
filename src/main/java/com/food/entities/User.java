@@ -23,62 +23,62 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @Getter
 @Setter
 @ToString(exclude = "passwordHash")
 @NoArgsConstructor
 
 public class User {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-@JoinColumn(name="profile_media_id")
-@OneToOne
+	@JoinColumn(name = "profile_media_id")
+	@OneToOne
 	private Media profileMediaId;
 
-@Column(length = 100,nullable = false)
+	@Column(length = 100, nullable = false)
 	private String name;
 
-@Column(length=255,unique = true,nullable = false)
+	@Column(length = 255, unique = true, nullable = false)
 	private String email;
-	
-@Column(length=255,nullable = false)
+
+	@Column(length = 255, nullable = false)
 	private String passwordHash;
-	
-	@Column(length = 15,nullable = false,unique = true)
+
+	@Column(length = 15, nullable = false, unique = true)
 	private String phone;
-	
-	@Column(name="account_type",length = 20,nullable = false)
+
+	@Column(name = "account_type", length = 20, nullable = false)
 	private String accountType;
-	
-	@Column(name="team_role",length = 30)
+
+	@Column(name = "team_role", length = 30)
 	private String teamRole;
-	
-	@Column(length = 20,nullable = false)
+
+	@Column(length = 20, nullable = false)
 	private String status;
-	
-	@Column(length = 300,nullable = false)
+
+	@Column(length = 300, nullable = false)
 	private String address;
-	
-	@Column(length = 100,nullable = false)
+
+	@Column(length = 100, nullable = false)
 	private String city;
-	
-	@Column(precision=10,scale=7)
+
+	@Column(precision = 10, scale = 7)
 	private BigDecimal latitude;
-	
-	@Column(precision=10,scale=7)
+
+	@Column(precision = 10, scale = 7)
 	private BigDecimal longitude;
-	
+
 	@CreationTimestamp
-	@Column(name="created_at",nullable = false,updatable = false)
+	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
-	
+
 	@UpdateTimestamp
-	@Column(name="updated_at")
+	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
-	
+
 //	@OneToMany(mappedBy = "uploadedBy")
 //	private List<Media>uploadedMedia=new ArrayList<>();
 //

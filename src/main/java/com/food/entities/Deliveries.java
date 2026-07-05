@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="deliveries")
+@Table(name = "deliveries")
 @Getter
 @Setter
 @ToString
@@ -25,33 +25,30 @@ import lombok.ToString;
 public class Deliveries {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
-	
+	private int id;
 
+	@Column(name = "delivery_mode")
+	private String deliveryMode;
 
-	@Column(name="delivery_mode")
-private String deliveryMode;
-	
-	@Column(name="status")
-private String status;
-	
-	@Column(name="pickup_time")
-private LocalDateTime pickupTime;
-	
-	@Column(name="delivery_time")
-private LocalDateTime deliveryTime;
-	
-	
+	@Column(name = "status")
+	private String status;
+
+	@Column(name = "pickup_time")
+	private LocalDateTime pickupTime;
+
+	@Column(name = "delivery_time")
+	private LocalDateTime deliveryTime;
+
 	@ManyToOne
-	@JoinColumn(name="delivery_partner_id")
-private User deliveryPartner;
-	
+	@JoinColumn(name = "delivery_partner_id")
+	private User deliveryPartner;
+
 //	@OneToOne
 //	private Matches match;
 	@OneToOne
 	@JoinColumn(name = "match_id")
 	private Matches match;
-	
+
 //	@OneToOne(mappedBy = "delivery")
 //	private DeliveryOutcomes outcomes;
 }

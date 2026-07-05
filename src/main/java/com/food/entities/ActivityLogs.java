@@ -18,7 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="activitylogs")
+@Table(name = "activitylogs")
 @Setter
 @Getter
 @ToString
@@ -26,22 +26,22 @@ import lombok.ToString;
 public class ActivityLogs {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-	
+	private Long id;
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
-	
-private User user;
-	
-private String action;
+	@JoinColumn(name = "user_id")
 
-@Column(name="entity_type")
-private String entityType;
+	private User user;
 
-@Column(name="entity_id")
-private String entityId;
+	private String action;
 
-@Column(name="created_at")
-@CreationTimestamp
-private LocalDateTime createdAt;
+	@Column(name = "entity_type")
+	private String entityType;
+
+	@Column(name = "entity_id")
+	private String entityId;
+
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 }

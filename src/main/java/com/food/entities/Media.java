@@ -21,7 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="media")
+@Table(name = "media")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,31 +29,31 @@ import lombok.ToString;
 public class Media {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-	
-	@Column(name="file_name",length = 255,nullable = false)
-private String fileName;
-	
-	@Column(name="file_path",length = 500,nullable = false)
+	private Long id;
+
+	@Column(name = "file_name", length = 255, nullable = false)
+	private String fileName;
+
+	@Column(name = "file_path", length = 500, nullable = false)
 	private String filePath;
-	
-	@Column(name="mime_type",length = 100,nullable = false)
-private String mimeType;
-	
-	@Column(name = "file_size",nullable = false)
-private Long fileSize;
-	
-	@Column(name="compression_ratio")
-private Double compressionRatio;
-	
+
+	@Column(name = "mime_type", length = 100, nullable = false)
+	private String mimeType;
+
+	@Column(name = "file_size", nullable = false)
+	private Long fileSize;
+
+	@Column(name = "compression_ratio")
+	private Double compressionRatio;
+
 	@ManyToOne
-	@JoinColumn(name="uploaded_by",nullable = false)
-private User uploadedBy;
-	
+	@JoinColumn(name = "uploaded_by", nullable = false)
+	private User uploadedBy;
+
 	@CreationTimestamp
-	@Column(name="uploaded_at",nullable = false,updatable = false)
-private LocalDateTime uploadedAt;
-	
+	@Column(name = "uploaded_at", nullable = false, updatable = false)
+	private LocalDateTime uploadedAt;
+
 //	@OneToMany(mappedBy ="media")
 //	List<Document>document=new ArrayList<>();
 }

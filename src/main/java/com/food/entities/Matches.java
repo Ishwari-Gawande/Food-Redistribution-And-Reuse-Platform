@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="matches")
+@Table(name = "matches")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,26 +25,26 @@ import lombok.ToString;
 public class Matches {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-	
+	private Long id;
+
 	@ManyToOne
-	@JoinColumn(name="donation_request_id")
-private Request donationRequest;
-	
+	@JoinColumn(name = "donation_request_id")
+	private Request donationRequest;
+
 	@ManyToOne
-	@JoinColumn(name="receiver_request_id")
-private Request receiverRequest;
-	
-	@Column(name="match_status")
-private String matchStatus;
-	
-	@Column(name="matched_at")
-private LocalDateTime matchedAt;
-	
+	@JoinColumn(name = "receiver_request_id")
+	private Request receiverRequest;
+
+	@Column(name = "match_status")
+	private String matchStatus;
+
+	@Column(name = "matched_at")
+	private LocalDateTime matchedAt;
+
 	@ManyToOne
-	@JoinColumn(name="matched_by")
-private User matchedBy;
-	
+	@JoinColumn(name = "matched_by")
+	private User matchedBy;
+
 //@OneToOne(mappedBy = "match")
 //private Deliveries delivery;
 }

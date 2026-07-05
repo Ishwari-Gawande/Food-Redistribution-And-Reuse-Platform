@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="notifications")
+@Table(name = "notifications")
 @Setter
 @Getter
 @ToString
@@ -24,21 +24,21 @@ import lombok.ToString;
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-	
+	private Long id;
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
-private User user;
-	
-	@Column(name="title")
-private String title;
-	
-	@Column(name="message")
-private String message;
-	
-	@Column(name="is_read")
-private boolean isRead;
-	
-	@Column(name="created_at")
-private LocalDateTime createdAt;
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@Column(name = "title")
+	private String title;
+
+	@Column(name = "message")
+	private String message;
+
+	@Column(name = "is_read")
+	private boolean isRead;
+
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 }

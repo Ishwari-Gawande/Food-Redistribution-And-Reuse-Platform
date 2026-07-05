@@ -1,7 +1,10 @@
 package com.food.controller;
 
+<<<<<<< HEAD
 
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+>>>>>>> 3d87fabacb049dc317e1ffad3813623d4f1b010f
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,29 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.food.DTO.NotificationDTO;
 import com.food.service.NotificationServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/notification")
+@RequiredArgsConstructor
 public class NotificationController {
-@Autowired
-private NotificationServiceImpl notificationService;
-	
-	@PostMapping
-	public ResponseEntity<?> sendNotification(
-	        @RequestBody NotificationDTO request) {
 
-	    return ResponseEntity.ok(notificationService.sendNotification(request));
+	private final NotificationServiceImpl notificationService;
+
+	@PostMapping
+	public ResponseEntity<?> sendNotification(@RequestBody NotificationDTO request) {
+
+		return ResponseEntity.ok(notificationService.sendNotification(request));
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<?> getMyNotifications() {
 
-	    return ResponseEntity.ok(notificationService.getMyNotifications());
+		return ResponseEntity.ok(notificationService.getMyNotifications());
 	}
-	
-	@PutMapping("/{id}/read")
-	public ResponseEntity<?> markAsRead(
-	        @PathVariable Long id) {
 
-	    return ResponseEntity.ok(notificationService.markAsRead(id));
+	@PutMapping("/{id}/read")
+	public ResponseEntity<?> markAsRead(@PathVariable Long id) {
+
+		return ResponseEntity.ok(notificationService.markAsRead(id));
 	}
 }

@@ -21,7 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="requests")
+@Table(name = "requests")
 @Getter
 @Setter
 @ToString
@@ -29,40 +29,40 @@ import lombok.ToString;
 public class Request {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-	
-	@Column(name="request_type")
-private String requestType;
-	
-	@Column(name="status")
-private String status;
-	
-	@Column(name="meal_preference")
-private String mealPreference;
-	
-	@Column(name="estimated_meals")
-private String estimatedMeals;
-	
-	@Column(name="pickup_address")
+	private Long id;
+
+	@Column(name = "request_type")
+	private String requestType;
+
+	@Column(name = "status")
+	private String status;
+
+	@Column(name = "meal_preference")
+	private String mealPreference;
+
+	@Column(name = "estimated_meals")
+	private String estimatedMeals;
+
+	@Column(name = "pickup_address")
 	private String pickUpAddress;
-	
-	@Column(name="delivery_available")
-private boolean deliveryAvailable;
-	
-	@Column(name="needed_by")
-private LocalDateTime neededBy;
-	
-	@Column(name="notes")
-private String notes;
-	
-	@Column(name="created_at")
+
+	@Column(name = "delivery_available")
+	private boolean deliveryAvailable;
+
+	@Column(name = "needed_by")
+	private LocalDateTime neededBy;
+
+	@Column(name = "notes")
+	private String notes;
+
+	@Column(name = "created_at")
 	@CreationTimestamp
-private LocalDateTime createdAt;
-	
+	private LocalDateTime createdAt;
+
 	@ManyToOne
-	@JoinColumn(name="user_id",nullable = false)
-private User user;
-	
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+
 //	@OneToMany(mappedBy = "requestId")
 //	List<RequestItems>RequestItemId=new ArrayList<>();
 //

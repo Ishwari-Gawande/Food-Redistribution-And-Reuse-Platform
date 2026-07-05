@@ -9,6 +9,6 @@ public interface NotificationService {
 	public String sendNotification(NotificationDTO request);
 
 	public List<Notification> getMyNotifications();
-	
-	public	String markAsRead(Long id);
+
+	public String markAsRead(Long id);
 }
