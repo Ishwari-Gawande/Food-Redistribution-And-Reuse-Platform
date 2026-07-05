@@ -1,6 +1,5 @@
 package com.food.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,59 +14,62 @@ import com.food.DTO.UserDTO;
 import com.food.repository.UserRepository;
 import com.food.service.UserServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    private final UserRepository userRepository;
+	private final UserRepository userRepository;
 
-    private final AuthController authController;
-@Autowired
-private UserServiceImpl userService;
+	private final AuthController authController;
 
-    UserController(AuthController authController, UserRepository userRepository) {
-        this.authController = authController;
-        this.userRepository = userRepository;
-    }
+	private final UserServiceImpl userService;
 
-@PostMapping
-public ResponseEntity<?> addNewUser(@RequestBody UserDTO request) {
-return ResponseEntity.ok(userService.addNewUser(request));
-}
+//	UserController(AuthController authController, UserRepository userRepository) {
+//		this.authController = authController;
+//		this.userRepository = userRepository;
+//	}
 
-@GetMapping("/{id}")
-public ResponseEntity<?>findById(@PathVariable Long id){
-	return ResponseEntity.ok(userService.findById(id));
-}
+	@PostMapping
+	public ResponseEntity<?> addNewUser(@RequestBody UserDTO request) {
+		return ResponseEntity.ok(userService.addNewUser(request));
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(userService.findById(id));
+	}
 
 //get all users
-@GetMapping
-public ResponseEntity<?>findAllUsers(){
-	return ResponseEntity.ok(userService.findAllUsers());
-}
+	@GetMapping
+	public ResponseEntity<?> findAllUsers() {
+		return ResponseEntity.ok(userService.findAllUsers());
+	}
 
 //Find by email
-@GetMapping("/email/{email}")
-public ResponseEntity<?>findByEmail(@PathVariable String email){
-	return ResponseEntity.ok(userService.findByEmail(email));
-}
+	@GetMapping("/email/{email}")
+	public ResponseEntity<?> findByEmail(@PathVariable String email) {
+		return ResponseEntity.ok(userService.findByEmail(email));
+	}
 
 //Update User
-@PutMapping("/{id}")
-public ResponseEntity<?>updateUser(@PathVariable Long id,@RequestBody UserDTO request){
-	return ResponseEntity.ok(userService.updateUser(id,request));
-}
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO request) {
+		return ResponseEntity.ok(userService.updateUser(id, request));
+	}
 
 //Delete user
-@DeleteMapping("/{id}")
-public ResponseEntity<?>deleteUser(@PathVariable Long id){
-	return ResponseEntity.ok(userService.deleteUser(id));
-}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+		return ResponseEntity.ok(userService.deleteUser(id));
+	}
 
 //update profile
-@PutMapping("/profile")
-public ResponseEntity<?> updateProfile(@RequestBody UserDTO request) {
+	@PutMapping("/profile")
+	public ResponseEntity<?> updateProfile(@RequestBody UserDTO request) {
 
-    return ResponseEntity.ok(userService.updateProfile(request));
-}
+		return ResponseEntity.ok(userService.updateProfile(request));
+	}
 }

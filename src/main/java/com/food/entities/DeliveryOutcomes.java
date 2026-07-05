@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="delivery_outcomes")
+@Table(name = "delivery_outcomes")
 @Getter
 @Setter
 @ToString
@@ -24,23 +24,23 @@ import lombok.ToString;
 public class DeliveryOutcomes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-	
+	private Long id;
+
 //	@OneToOne
 //	@JoinColumn(name="delievery_id")
 //	//@Column(name="delievery_id")
 //private Delieveries delieveries;
-	
-	@Column(name="outcome")
-private String outcome;
-	
-@Column(name="remark")
-private String remark;
 
-@Column(name="created_at")
-private LocalDateTime createdAt;
+	@Column(name = "outcome")
+	private String outcome;
 
-@OneToOne
-@JoinColumn(name="delivery_id")
-private Deliveries delivery;
+	@Column(name = "remark")
+	private String remark;
+
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+
+	@OneToOne
+	@JoinColumn(name = "delivery_id")
+	private Deliveries delivery;
 }

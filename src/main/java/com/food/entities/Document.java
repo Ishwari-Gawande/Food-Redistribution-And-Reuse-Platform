@@ -20,7 +20,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="documents")
+@Table(name = "documents")
 @Getter
 @Setter
 @ToString
@@ -29,27 +29,26 @@ public class Document {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="document_type",length = 50,nullable = false)
-private String documentType;
-	
-	@Column(name="verification_status",length = 20,nullable = false)
-private String verificationStatus;
-	
+
+	@Column(name = "document_type", length = 50, nullable = false)
+	private String documentType;
+
+	@Column(name = "verification_status", length = 20, nullable = false)
+	private String verificationStatus;
+
 	@Column(length = 500)
-private String remarks;
+	private String remarks;
 
-@CreationTimestamp
-@Column(name="uploaded_at",nullable = false,updatable = false)
-private LocalDateTime uploadedAt;
+	@CreationTimestamp
+	@Column(name = "uploaded_at", nullable = false, updatable = false)
+	private LocalDateTime uploadedAt;
 
-@OneToOne()
-@JoinColumn(name="media_id",nullable = false)
-private Media media;
+	@OneToOne()
+	@JoinColumn(name = "media_id", nullable = false)
+	private Media media;
 
-@ManyToOne()
-@JoinColumn(name="user_id",nullable = false)
-private User user;
-
+	@ManyToOne()
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
 }

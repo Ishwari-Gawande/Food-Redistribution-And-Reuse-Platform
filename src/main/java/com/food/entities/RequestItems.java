@@ -16,33 +16,33 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="request_items")
+@Table(name = "request_items")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class RequestItems {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-@Column(name="item_name")
+	@Column(name = "item_name")
 	private String itemName;
 
-@Column(name="food_category")
+	@Column(name = "food_category")
 	private String foodCategory;
 
-@Column(name="quantity")
+	@Column(name = "quantity")
 	private int quantity;
 
-@ManyToOne
-@JoinColumn(name="request_id")
+	@ManyToOne
+	@JoinColumn(name = "request_id")
 	private Request request;
 
-@Column(name="unit")
+	@Column(name = "unit")
 	private String unit;
 
-@Column(name="expiry_time")
+	@Column(name = "expiry_time")
 	private LocalDateTime expiryTime;
-	
+
 }
