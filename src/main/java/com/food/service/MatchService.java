@@ -8,4 +8,5 @@ public interface MatchService {
 public Matches findById(Long id);
 public List<Matches> findAllMatches();
 public List<Matches> findPendingMatches();
+public String approveMatch(Long id);
 }

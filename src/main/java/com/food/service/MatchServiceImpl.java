@@ -35,4 +35,18 @@ private MatchesRepository matchRepo;
 		return matchRepo.findByStatus("PENDING");
 	}
 
+	@Override
+	public String approveMatch(Long id) {
+
+	    Matches match = matchRepo.findById(id)
+	            .orElseThrow(() ->
+	                    new ResourceNotFoundException("Match not found"));
+
+	    match.setMatchStatus("APPROVED");
+
+	    matchRepo.save(match);
+
+	    return "Match Approved Successfully";
+	}
+
 }
