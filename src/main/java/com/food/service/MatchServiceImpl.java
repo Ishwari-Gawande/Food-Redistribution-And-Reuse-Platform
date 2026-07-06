@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.Matches;
-import com.food.repository.MatchRepository;
 import com.food.repository.MatchesRepository;
 
 import jakarta.transaction.Transactional;
+
 @Service
 @Transactional
 public class MatchServiceImpl implements MatchService {
@@ -32,8 +32,7 @@ private MatchesRepository matchRepo;
 
 	@Override
 	public List<Matches> findPendingMatches() {
-		return matchRepo.findByStatus("PENDING");
-	}
+		 return matchRepo.findByMatchStatus("PENDING");	}
 
 	@Override
 	public String approveMatch(Long id) {
@@ -47,6 +46,19 @@ private MatchesRepository matchRepo;
 	    matchRepo.save(match);
 
 	    return "Match Approved Successfully";
+	}
+
+	@Override
+	public String rejectMatch(Long id) {
+		Matches match = matchRepo.findById(id)
+	            .orElseThrow(() ->
+	                    new ResourceNotFoundException("Match not found"));
+
+	    match.setMatchStatus("REJECTED");
+
+	    matchRepo.save(match);
+
+	    return "Match Rejected Successfully";
 	}
 
 }

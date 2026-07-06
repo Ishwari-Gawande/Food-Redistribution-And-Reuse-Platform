@@ -9,4 +9,5 @@ public Matches findById(Long id);
 public List<Matches> findAllMatches();
 public List<Matches> findPendingMatches();
 public String approveMatch(Long id);
+public String rejectMatch(Long id);
 }
