@@ -41,4 +41,11 @@ public class MatchesController {
 	    return ResponseEntity.ok(matchService.approveMatch(id));
 
 	}
+	
+	@PutMapping("/{id}/reject")
+	public ResponseEntity<?> rejectMatch(@PathVariable Long id) {
+
+	    return ResponseEntity.ok(matchService.rejectMatch(id));
+
+	}
 }

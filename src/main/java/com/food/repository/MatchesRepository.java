@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.food.entities.Matches;
 
 public interface MatchesRepository extends JpaRepository<Matches, Long> {
-	List<Matches> findByStatus(String status);
+    List<Matches> findByMatchStatus(String matchStatus);
 }
