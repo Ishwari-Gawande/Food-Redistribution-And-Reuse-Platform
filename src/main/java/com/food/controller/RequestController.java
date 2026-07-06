@@ -6,31 +6,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.food.service.MatchServiceImpl;
+import com.food.service.RequestServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/match")
+@RequestMapping("/request")
 @RequiredArgsConstructor
-public class MatchesController {
+public class RequestController {
 
-	private final MatchServiceImpl matchService;
+	private final RequestServiceImpl requestService;
 
+	//find by id
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
-		return ResponseEntity.ok(matchService.findById(id));
-	}
 
-	@GetMapping
-	public ResponseEntity<?> findAllMatches() {
-		return ResponseEntity.ok(matchService.findAllMatches());
-	}
-
-	@GetMapping("/pending")
-	public ResponseEntity<?> findPendingMatches() {
-
-		return ResponseEntity.ok(matchService.findPendingMatches());
-
+		return ResponseEntity.ok(requestService.findById(id));
 	}
 }

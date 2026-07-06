@@ -13,11 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/dashboard")
 @RequiredArgsConstructor
 public class DashboardController {
-	
-	    private final DashboardService dashboardService;
 
-	    @GetMapping("/admin")
-	    public ResponseEntity<?> getAdminDashboard() {
-	        return ResponseEntity.ok(dashboardService.getAdminDashboard());
-	    }
+	private final DashboardService dashboardService;
+
+	@GetMapping("/admin")
+	public ResponseEntity<?> getAdminDashboard() {
+		return ResponseEntity.ok(dashboardService.getAdminDashboard());
+	}
 }

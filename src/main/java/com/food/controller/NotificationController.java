@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.food.DTO.NotificationDTO;
 import com.food.service.NotificationServiceImpl;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/notification")
 

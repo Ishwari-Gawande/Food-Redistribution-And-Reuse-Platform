@@ -1,5 +1,9 @@
 package com.food.repository;
 
-public interface RequestRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.food.entities.Request;
+
+public interface RequestRepository extends JpaRepository<Request, Long> {
 
 }

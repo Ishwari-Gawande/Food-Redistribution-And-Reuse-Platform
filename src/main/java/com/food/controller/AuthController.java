@@ -19,25 +19,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
-private final AuthServiceImpl authService;
+	private final AuthServiceImpl authService;
 
-@PostMapping("/register")
-public ResponseEntity<?> register(@RequestBody RegisterDTO request) {
-	return ResponseEntity.ok(authService.register(request));
-}
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody RegisterDTO request) {
+		return ResponseEntity.ok(authService.register(request));
+	}
 
-@PostMapping("/login")
-public ResponseEntity<?> login(@RequestBody LoginDTO request) {
-	return ResponseEntity.ok(authService.logIn(request));
-}
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody LoginDTO request) {
+		return ResponseEntity.ok(authService.logIn(request));
+	}
 
-@PostMapping("/forgot-password")
-public ResponseEntity<?> forgotPassword(@RequestBody ForgetPasswordDTO request){
-	return ResponseEntity.ok(authService.forgotPassword(request));
-}
+	@PostMapping("/forgot-password")
+	public ResponseEntity<?> forgotPassword(@RequestBody ForgetPasswordDTO request) {
+		return ResponseEntity.ok(authService.forgotPassword(request));
+	}
 
-@PostMapping("/reset-password")
-public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO request){
-	return ResponseEntity.ok(authService.resetPassword(request));
-}
+	@PostMapping("/reset-password")
+	public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO request) {
+		return ResponseEntity.ok(authService.resetPassword(request));
+	}
 }
