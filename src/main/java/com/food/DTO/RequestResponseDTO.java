@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RequestDTO {
+public class RequestResponseDTO {
 	
-	private Long userId;
+	private Long id;
 
 	private String requestType;
 
@@ -28,4 +28,6 @@ public class RequestDTO {
 	private String notes;
 
 	private LocalDateTime createdAt;
+	
+	private String message;
 }

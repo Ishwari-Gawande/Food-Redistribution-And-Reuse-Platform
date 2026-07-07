@@ -1,10 +1,12 @@
 package com.food.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.food.DTO.RequestDTO;
+import com.food.DTO.RequestResponseDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.Request;
 import com.food.entities.User;
@@ -23,9 +25,10 @@ public class RequestServiceImpl implements RequestService {
 	private final RequestRepository requestRepo;
 
 	@Override
-	public String AddNewRequest(RequestDTO dto) {
-		
-		User user = userRepo.findByEmail(email);
+	public RequestResponseDTO AddNewRequest(RequestDTO dto) {
+
+		User user = userRepo.findById(dto.getUserId())
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
 		Request request = new Request();
 
@@ -37,10 +40,29 @@ public class RequestServiceImpl implements RequestService {
 		request.setDeliveryAvailable(dto.isDeliveryAvailable());
 		request.setNeededBy(dto.getNeededBy());
 		request.setNotes(dto.getNotes());
-		request.setCreatedAt(dto.getCreatedAt().now());
+		request.setCreatedAt(LocalDateTime.now());
 		request.setUser(user);
 
-		return null;
+		// Save Request
+		Request savedRequest = requestRepo.save(request);
+
+		// Prepare Response DTO
+		RequestResponseDTO response = new RequestResponseDTO();
+
+		response.setId(savedRequest.getId());
+		response.setRequestType(savedRequest.getRequestType());
+		response.setStatus(savedRequest.getStatus());
+		response.setMealPreference(savedRequest.getMealPreference());
+		response.setEstimatedMeals(savedRequest.getEstimatedMeals());
+		response.setPickUpAddress(savedRequest.getPickUpAddress());
+		response.setDeliveryAvailable(savedRequest.isDeliveryAvailable());
+		response.setNeededBy(savedRequest.getNeededBy());
+		response.setNotes(savedRequest.getNotes());
+		response.setCreatedAt(savedRequest.getCreatedAt());
+
+		response.setMessage("Request created successfully");
+
+		return response;
 	}
 
 	@Override
