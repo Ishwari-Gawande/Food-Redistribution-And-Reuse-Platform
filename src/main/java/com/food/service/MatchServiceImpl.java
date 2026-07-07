@@ -17,72 +17,64 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class MatchServiceImpl implements MatchService {
-@Autowired
-private MatchesRepository matchRepo;
-@Autowired
-private UserRepository userRepo;
-	
+	@Autowired
+	private MatchesRepository matchRepo;
+	@Autowired
+	private UserRepository userRepo;
+
 	@Override
 	public Matches findById(Long id) {
-		   return matchRepo.findById(id)
-		            .orElseThrow(() ->
-		                    new ResourceNotFoundException("Match not found"));
+		return matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 	}
 
 	@Override
 	public List<Matches> findAllMatches() {
-		
+
 		return matchRepo.findAll();
 	}
 
 	@Override
 	public List<Matches> findPendingMatches() {
-		 return matchRepo.findByMatchStatus("PENDING");	}
+		return matchRepo.findByMatchStatus("PENDING");
+	}
 
 	@Override
 	public String approveMatch(Long id) {
 
-	    Matches match = matchRepo.findById(id)
-	            .orElseThrow(() ->
-	                    new ResourceNotFoundException("Match not found"));
+		Matches match = matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-	    match.setMatchStatus("APPROVED");
+		match.setMatchStatus("APPROVED");
 
-	    matchRepo.save(match);
+		matchRepo.save(match);
 
-	    return "Match Approved Successfully";
+		return "Match Approved Successfully";
 	}
 
 	@Override
 	public String rejectMatch(Long id) {
-		Matches match = matchRepo.findById(id)
-	            .orElseThrow(() ->
-	                    new ResourceNotFoundException("Match not found"));
+		Matches match = matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-	    match.setMatchStatus("REJECTED");
+		match.setMatchStatus("REJECTED");
 
-	    matchRepo.save(match);
+		matchRepo.save(match);
 
-	    return "Match Rejected Successfully";
+		return "Match Rejected Successfully";
 	}
 
 	@Override
 	public String assignDeliveryPartner(Long matchId, AssignDeliveryDTO request) {
-		  Matches match = matchRepo.findById(matchId)
-		            .orElseThrow(() ->
-		                    new ResourceNotFoundException("Match not found"));
+		Matches match = matchRepo.findById(matchId).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-		    User deliveryPartner = userRepo.findById(request.getDeliveryPartnerId())
-		            .orElseThrow(() ->
-		                    new ResourceNotFoundException("Delivery Partner not found"));
+		User deliveryPartner = userRepo.findById(request.getDeliveryPartnerId())
+				.orElseThrow(() -> new ResourceNotFoundException("Delivery Partner not found"));
 
-		    match.setDeliveryPartner(deliveryPartner);
+		match.setDeliveryPartner(deliveryPartner);
 
-		    match.setMatchStatus("ASSIGNED");
+		match.setMatchStatus("ASSIGNED");
 
-		    matchRepo.save(match);
+		matchRepo.save(match);
 
-		    return "Delivery Partner Assigned Successfully";
+		return "Delivery Partner Assigned Successfully";
 	}
 
 }
