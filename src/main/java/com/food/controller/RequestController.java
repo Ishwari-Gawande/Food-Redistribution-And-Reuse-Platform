@@ -17,10 +17,16 @@ public class RequestController {
 
 	private final RequestServiceImpl requestService;
 
-	//find by id
+	// find by id
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 
 		return ResponseEntity.ok(requestService.findById(id));
+	}
+
+	// find all requests
+	@GetMapping
+	public ResponseEntity<?> findAllRequests() {
+		return ResponseEntity.ok(requestService.findAllRequest());
 	}
 }
