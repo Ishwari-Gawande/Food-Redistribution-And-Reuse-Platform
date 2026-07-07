@@ -45,6 +45,9 @@ public class Matches {
 	@JoinColumn(name = "matched_by")
 	private User matchedBy;
 
+	@ManyToOne
+	@JoinColumn(name = "delivery_partner_id")
+	private User deliveryPartner;
 //@OneToOne(mappedBy = "match")
 //private Deliveries delivery;
 }
