@@ -1,0 +1,54 @@
+package com.food.service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+
+import com.food.DTO.DeliveryDTO;
+import com.food.Exception.ResourceNotFoundException;
+import com.food.entities.Deliveries;
+import com.food.entities.Matches;
+import com.food.entities.User;
+import com.food.repository.DelieveryRepository;
+import com.food.repository.MatchesRepository;
+import com.food.repository.UserRepository;
+
+public class DelieveryServiceImpl implements DeliveryService{
+	@Autowired
+	private MatchesRepository matchRepo;
+	@Autowired
+	private UserRepository userRepo;
+	@Autowired
+	private DelieveryRepository deliveryRepo;
+	
+@Override
+	public String createDelivery(DeliveryDTO request) {
+	  Matches match = matchRepo.findById(request.getMatchId())
+	            .orElseThrow(() ->
+	                new ResourceNotFoundException("Match not found"));
+
+	    User partner = userRepo.findById(request.getDeliveryPartnerId())
+	            .orElseThrow(() ->
+	                new ResourceNotFoundException("Delivery Partner not found"));
+
+	    Deliveries delivery = new Deliveries();
+
+	    delivery.setMatch(match);
+	    delivery.setDeliveryPartner(partner);
+	    delivery.setStatus("ASSIGNED");
+
+	    deliveryRepo.save(delivery);
+
+	    return "Delivery Created Successfully";
+	
+	}
+
+}

@@ -25,7 +25,7 @@ import lombok.ToString;
 public class Deliveries {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@Column(name = "delivery_mode")
 	private String deliveryMode;
