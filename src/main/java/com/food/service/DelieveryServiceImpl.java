@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Service;
 
 import com.food.DTO.DeliveryDTO;
 import com.food.Exception.ResourceNotFoundException;
@@ -21,6 +22,9 @@ import com.food.repository.DelieveryRepository;
 import com.food.repository.MatchesRepository;
 import com.food.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+@Service
+@Transactional
 public class DelieveryServiceImpl implements DeliveryService{
 	@Autowired
 	private MatchesRepository matchRepo;
@@ -50,5 +54,50 @@ public class DelieveryServiceImpl implements DeliveryService{
 	    return "Delivery Created Successfully";
 	
 	}
+
+@Override
+public Deliveries findById(Long id) {
+	 return deliveryRepo.findById(id)
+	            .orElseThrow(() ->
+	                new ResourceNotFoundException("Delivery not found"));
+}
+
+@Override
+public List<Deliveries> findAssignedDeliveries() {
+	return deliveryRepo.findByStatus("ASSIGNED");
+}
+
+@Override
+public String startDelivery(Long id) {
+	Deliveries delivery = deliveryRepo.findById(id)
+            .orElseThrow(() ->
+                new ResourceNotFoundException("Delivery not found"));
+
+    delivery.setStatus("IN_PROGRESS");
+
+    deliveryRepo.save(delivery);
+
+    return "Delivery Started";
+}
+
+@Override
+public String completeDelivery(Long id) {
+	  Deliveries delivery = deliveryRepo.findById(id)
+	            .orElseThrow(() ->
+	                new ResourceNotFoundException("Delivery not found"));
+
+	    delivery.setStatus("COMPLETED");
+
+	    deliveryRepo.save(delivery);
+
+	    return "Delivery Completed Successfully";
+}
+
+@Override
+public Deliveries trackDelivery(Long id) {
+	  return deliveryRepo.findById(id)
+	            .orElseThrow(() ->
+	                new ResourceNotFoundException("Delivery not found"));
+}
 
 }
