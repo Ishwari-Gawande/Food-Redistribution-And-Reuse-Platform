@@ -23,7 +23,7 @@ public class MediaController {
     public ResponseEntity<?> uploadImage(
             @RequestParam("file") MultipartFile file) {
 
-        return ResponseEntity.ok(mediaService.uploadImage(file));
+        return ResponseEntity.ok(mediaService.uploadImage(file, null));
     }
 
     @GetMapping("/{id}")
