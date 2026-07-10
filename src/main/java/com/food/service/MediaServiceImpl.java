@@ -17,7 +17,7 @@ public class MediaServiceImpl implements MediaService {
 private MediaRepository mediaRepo;
 
 @Override
-public String uploadImage(MultipartFile file, User user) {
+public String uploadImage(MultipartFile file,User user) {
 	Media media = new Media();
 
     media.setFileName(file.getOriginalFilename());
@@ -31,6 +31,7 @@ public String uploadImage(MultipartFile file, User user) {
 
     return "Image Uploaded Successfully";
 }
+
 
 @Override
 public Media findById(Long id) {
@@ -49,13 +50,6 @@ public String deleteImage(Long id) {
 
 	    return "Image Deleted Successfully";
 }
-
-@Override
-public String uploadImage(MultipartFile file) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
 
 
 }

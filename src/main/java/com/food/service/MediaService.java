@@ -6,11 +6,11 @@ import com.food.entities.Media;
 import com.food.entities.User;
 
 public interface MediaService {
-public String uploadImage(MultipartFile file);
-
+	//upload image
+public String uploadImage(MultipartFile file,User user);
+//find by id
 public Media findById(Long id);
-
+//delete image
 public String deleteImage(Long id);
 
-String uploadImage(MultipartFile file, User user);
 }
