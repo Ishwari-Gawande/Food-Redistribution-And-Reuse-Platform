@@ -37,4 +37,11 @@ private DeliveryOutcomesRepository deliveryOutcomeRepo;
         return "Delivery Outcome Added Successfully";
 	}
 
+@Override
+public DeliveryOutcomes findByDelivery(Long deliveryId) {
+	return deliveryOutcomeRepo.findByDeliveryId(deliveryId)
+            .orElseThrow(() ->
+                new ResourceNotFoundException("Delivery Outcome not found"));
+}
+
 }

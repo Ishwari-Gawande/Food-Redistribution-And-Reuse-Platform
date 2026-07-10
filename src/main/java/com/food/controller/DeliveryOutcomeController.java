@@ -21,4 +21,12 @@ public class DeliveryOutcomeController {
 	        return ResponseEntity.ok(
 	                deliveryOutcomeService.addOutcome(request));
 	    }
+	 
+	 @GetMapping("/{deliveryId}")
+	 public ResponseEntity<?> findByDelivery(
+	         @PathVariable Long deliveryId) {
+
+	     return ResponseEntity.ok(
+	             deliveryOutcomeService.findByDelivery(deliveryId));
+	 }
 }
