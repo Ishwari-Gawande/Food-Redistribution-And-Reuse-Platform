@@ -23,11 +23,18 @@ public class ActivityLogsController {
         return ResponseEntity.ok(activityService.findAll());
     }
 
-    
 
     @GetMapping("/{id}")
     public ResponseEntity<ActivityLogs> findById(@PathVariable Long id) {
 
         return ResponseEntity.ok(activityService.findById(id));
     }
+    
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ActivityLogs>> findByUser(
+            @PathVariable Long userId) {
+
+        return ResponseEntity.ok(activityService.findByUser(userId));
+    }
+
 }

@@ -8,4 +8,7 @@ public interface ActivityLogsService {
 	public List<ActivityLogs> findAll();
 
 	public ActivityLogs findById(Long id);
+	
+	public List<ActivityLogs> findByUser(Long userId);
+
 }

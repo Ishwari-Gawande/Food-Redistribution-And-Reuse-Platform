@@ -25,5 +25,9 @@ public class ActivityLogsServiceImpl implements ActivityLogsService {
 	                .orElseThrow(() ->
 	                        new ResourceNotFoundException("Activity Log not found"));
 	}
+	@Override
+	public List<ActivityLogs> findByUser(Long userId) {
+	     return activityRepo.findByUserId(userId);
+	}
 
 }
