@@ -1,6 +1,7 @@
 package com.food.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.food.Exception.ResourceNotFoundException;
@@ -11,6 +12,9 @@ import com.food.repository.DocumentRepository;
 import com.food.repository.MediaRepository;
 import com.food.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+@Service
+@Transactional
 public class DocumentServiceImpl implements DocumentService {
 @Autowired
 private UserRepository userRepo;

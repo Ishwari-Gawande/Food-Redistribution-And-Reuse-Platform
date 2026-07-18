@@ -14,15 +14,13 @@ import com.food.service.DocumentService;
 @RequestMapping("/api/documents")
 public class DocumentController {
 
-    @Autowired
-    private DocumentService documentService;
+	@Autowired
+	private DocumentService documentService;
 
-    @PostMapping
-    public ResponseEntity<?> uploadDocument(
-            @RequestParam Long userId,
-            @RequestParam MultipartFile file) {
-
-        return ResponseEntity.ok(documentService.uploadDocument(userId, file));
-    }
+	@PostMapping
+	public ResponseEntity<String> uploadDocument(@RequestParam Long userId, @RequestParam String documentType,
+			@RequestParam MultipartFile file) {
+		return ResponseEntity.ok(documentService.uploadDocument(userId, documentType, file));
+	}
 
 }
