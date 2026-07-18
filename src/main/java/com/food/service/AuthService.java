@@ -2,6 +2,7 @@ package com.food.service;
 
 import com.food.DTO.ForgetPasswordDTO;
 import com.food.DTO.LoginDTO;
+import com.food.DTO.LoginResponseDTO;
 import com.food.DTO.RegisterDTO;
 import com.food.DTO.ResetPasswordDTO;
 
@@ -10,7 +11,7 @@ public interface AuthService {
 	public String register(RegisterDTO registerRequest);
 
 //For Log in
-	public String logIn(LoginDTO loginRequest);
+	public LoginResponseDTO logIn(LoginDTO loginRequest);
 
 //For Forgot password
 	public String forgotPassword(ForgetPasswordDTO request);

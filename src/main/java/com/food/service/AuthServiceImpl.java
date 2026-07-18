@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.food.DTO.ForgetPasswordDTO;
 import com.food.DTO.LoginDTO;
+import com.food.DTO.LoginResponseDTO;
 import com.food.DTO.RegisterDTO;
 import com.food.DTO.ResetPasswordDTO;
 import com.food.Exception.ResourceNotFoundException;
@@ -44,16 +45,22 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public String logIn(LoginDTO loginRequest) {
-		User user = userRepo.findByEmail(loginRequest.getEmail())
-				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+	public LoginResponseDTO logIn(LoginDTO loginRequest) {
+		  User user = userRepo.findByEmail(loginRequest.getEmail())
+		            .orElseThrow(() ->
+		                    new ResourceNotFoundException("User not found"));
 
-		if (!user.getPasswordHash().equals(loginRequest.getPassword())) {
-			throw new ResourceNotFoundException("Invalid Password");
-		}
-		return "Login Successfull";
+		    if (!user.getPasswordHash().equals(loginRequest.getPassword())) {
+		        throw new ResourceNotFoundException("Invalid Password");
+		    }
+
+		    return new LoginResponseDTO(
+		            "Login Successful",
+		            user.getId(),
+		            user.getName(),
+		            user.getAccountType()
+		    );
 	}
-
 	@Override
 	public String forgotPassword(ForgetPasswordDTO request) {
 		if (!userRepo.existsByEmail(request.getEmail())) {
@@ -71,5 +78,8 @@ public class AuthServiceImpl implements AuthService {
 		userRepo.save(user);
 		return "Password reset successfully";
 	}
+
+
+
 
 }

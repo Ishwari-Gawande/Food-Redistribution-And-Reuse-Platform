@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.food.DTO.ForgetPasswordDTO;
 import com.food.DTO.LoginDTO;
+import com.food.DTO.LoginResponseDTO;
 import com.food.DTO.RegisterDTO;
 import com.food.DTO.ResetPasswordDTO;
 import com.food.service.AuthServiceImpl;
@@ -27,8 +28,9 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginDTO request) {
-		return ResponseEntity.ok(authService.logIn(request));
+	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO request) {
+
+	    return ResponseEntity.ok(authService.logIn(request));
 	}
 
 	@PostMapping("/forgot-password")
