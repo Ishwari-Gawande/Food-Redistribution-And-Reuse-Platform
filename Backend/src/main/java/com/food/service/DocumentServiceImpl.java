@@ -68,4 +68,30 @@ private DocumentRepository documentRepo;
 		   return documentRepo.findByUserId(userId);
 	}
 
+	@Override
+	public String verifyDocument(Long id) {
+		 Document document = documentRepo.findById(id)
+		            .orElseThrow(() ->
+		                    new ResourceNotFoundException("Document not found"));
+
+		    document.setVerificationStatus("VERIFIED");
+
+		    documentRepo.save(document);
+
+		    return "Document Verified Successfully";
+	}
+
+	@Override
+	public String rejectDocument(Long id) {
+		Document document = documentRepo.findById(id)
+	            .orElseThrow(() ->
+	                    new ResourceNotFoundException("Document not found"));
+
+	    document.setVerificationStatus("REJECTED");
+
+	    documentRepo.save(document);
+
+	    return "Document Rejected Successfully";
+	}
+
 }
