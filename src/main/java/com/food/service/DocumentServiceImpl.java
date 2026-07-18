@@ -1,5 +1,7 @@
 package com.food.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,6 +54,18 @@ private DocumentRepository documentRepo;
         documentRepo.save(document);
 
         return "Document Uploaded Successfully";
+	}
+
+	@Override
+	public Document findById(Long id) {
+		 return documentRepo.findById(id)
+		            .orElseThrow(() ->
+		                    new ResourceNotFoundException("Document not found"));
+	}
+
+	@Override
+	public List<Document> findUserDocuments(Long userId) {
+		   return documentRepo.findByUserId(userId);
 	}
 
 }
