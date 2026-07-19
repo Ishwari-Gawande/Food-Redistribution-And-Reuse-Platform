@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.food.DTO.DeliveryDTO;
 import com.food.DTO.DeliveryOutcomeDTO;
@@ -13,6 +14,9 @@ import com.food.entities.DeliveryOutcomes;
 import com.food.repository.DelieveryRepository;
 import com.food.repository.DeliveryOutcomesRepository;
 
+import jakarta.transaction.Transactional;
+@Service
+@Transactional
 public class DeliveryOutcomeServiceImpl implements DeliveryOutcomesService{
 @Autowired
 private DelieveryRepository deliveriesRepo;
