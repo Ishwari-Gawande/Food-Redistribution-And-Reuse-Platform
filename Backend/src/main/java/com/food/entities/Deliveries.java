@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,22 +29,27 @@ public class Deliveries {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Delivery mode is required")
 	@Column(name = "delivery_mode")
 	private String deliveryMode;
 
+	  @NotBlank(message = "Delivery status is required")
 	@Column(name = "status")
 	private String status;
 
+	 @NotNull(message = "Pickup time is required")
 	@Column(name = "pickup_time")
 	private LocalDateTime pickupTime;
 
 	@Column(name = "delivery_time")
 	private LocalDateTime deliveryTime;
 
+	 @NotNull(message = "Delivery partner is required")
 	@ManyToOne
 	@JoinColumn(name = "delivery_partner_id")
 	private User deliveryPartner;
 
+	 @NotNull(message = "Match is required")
 	@OneToOne
 	@JoinColumn(name = "match_id")
 	private Matches match;

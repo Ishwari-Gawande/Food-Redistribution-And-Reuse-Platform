@@ -52,8 +52,8 @@ public class User {
 	@Column(length = 255, unique = true, nullable = false)
 	private String email;
 
-	@NotBlank(message="password is required")
-	@Size(min=6,message="Password much be at least 6 character")
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters")
 	@Column(length = 255, nullable = false)
 	private String passwordHash;
 
@@ -62,19 +62,22 @@ public class User {
 	@Column(length = 15, nullable = false, unique = true)
 	private String phone;
 
-	@NotNull(message = "Role is required")
+	@NotBlank(message = "Role is required")
 	@Column(name = "account_type", length = 20, nullable = false)
 	private String accountType;
 
 	@Column(name = "team_role", length = 30)
 	private String teamRole;
 
+	@NotBlank(message = "Status is required")
 	@Column(length = 20, nullable = false)
 	private String status;
 
+	@NotBlank(message = "Address is required")
 	@Column(length = 300, nullable = false)
 	private String address;
 
+	@NotBlank(message = "City is required")
 	@Column(length = 100, nullable = false)
 	private String city;
 
