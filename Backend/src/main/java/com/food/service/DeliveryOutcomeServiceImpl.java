@@ -15,37 +15,36 @@ import com.food.repository.DelieveryRepository;
 import com.food.repository.DeliveryOutcomesRepository;
 
 import jakarta.transaction.Transactional;
+
 @Service
 @Transactional
-public class DeliveryOutcomeServiceImpl implements DeliveryOutcomesService{
-@Autowired
-private DelieveryRepository deliveriesRepo;
-@Autowired
-private DeliveryOutcomesRepository deliveryOutcomeRepo;
+public class DeliveryOutcomeServiceImpl implements DeliveryOutcomesService {
+	@Autowired
+	private DelieveryRepository deliveriesRepo;
+	@Autowired
+	private DeliveryOutcomesRepository deliveryOutcomeRepo;
 
-@Override
+	@Override
 	public String addOutcome(DeliveryOutcomeDTO request) {
 		Deliveries delivery = deliveriesRepo.findById(request.getDeliveryId())
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Delivery not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("Delivery not found"));
 
-        DeliveryOutcomes outcome=new DeliveryOutcomes();
+		DeliveryOutcomes outcome = new DeliveryOutcomes();
 
-        outcome.setDelivery(delivery);
-        outcome.setOutcome(request.getOutcome());
-        outcome.setRemark(request.getRemarks());
-        outcome.setCreatedAt(LocalDateTime.now());
+		outcome.setDelivery(delivery);
+		outcome.setOutcome(request.getOutcome());
+		outcome.setRemark(request.getRemarks());
+		outcome.setCreatedAt(LocalDateTime.now());
 
-        deliveryOutcomeRepo.save(outcome);
+		deliveryOutcomeRepo.save(outcome);
 
-        return "Delivery Outcome Added Successfully";
+		return "Delivery Outcome Added Successfully";
 	}
 
-@Override
-public DeliveryOutcomes findByDelivery(Long deliveryId) {
-	return deliveryOutcomeRepo.findByDeliveryId(deliveryId)
-            .orElseThrow(() ->
-                new ResourceNotFoundException("Delivery Outcome not found"));
-}
+	@Override
+	public DeliveryOutcomes findByDelivery(Long deliveryId) {
+		return deliveryOutcomeRepo.findByDeliveryId(deliveryId)
+				.orElseThrow(() -> new ResourceNotFoundException("Delivery Outcome not found"));
+	}
 
 }

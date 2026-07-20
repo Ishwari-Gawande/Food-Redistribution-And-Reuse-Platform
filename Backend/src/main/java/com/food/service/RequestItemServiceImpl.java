@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.food.DTO.RequestItemDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.Request;
 import com.food.entities.RequestItems;
@@ -33,5 +34,56 @@ public class RequestItemServiceImpl implements RequestItemService {
 		Request request = requestRepo.findById(requestId)
 				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!!"));
 		return requestItemRepo.findByRequest(request);
+	}
+
+	@Override
+	public String deleteRequestItem(Long id) {
+		RequestItems item = requestItemRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Request Item Not Found!!"));
+		requestItemRepo.delete(item);
+		return "RequestItem Deleted Successfully!";
+	}
+
+	@Override
+	public String addNewItem(RequestItemDTO dto) {
+		Request req = requestRepo.findById(dto.getRequestId())
+				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!!"));
+
+		RequestItems items = new RequestItems();
+
+		items.setItemName(dto.getItemName());
+		items.setFoodCategory(dto.getFoodCategory());
+		items.setQuantity(dto.getQuantity());
+		items.setUnit(dto.getUnit());
+		items.setExpiryTime(dto.getExpiryTime());
+
+		items.setRequest(req);
+
+		requestItemRepo.save(items);
+
+		return "Item Added Successfully!";
+	}
+
+	@Override
+	public String updateItem(Long id, RequestItemDTO dto) {
+		RequestItems items = requestItemRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Item not found with id " + id));
+
+		items.setItemName(dto.getItemName());
+		items.setFoodCategory(dto.getFoodCategory());
+		items.setQuantity(dto.getQuantity());
+		items.setUnit(dto.getUnit());
+		items.setExpiryTime(dto.getExpiryTime());
+
+		if (dto.getRequestId() != null) {
+			Request request = requestRepo.findById(dto.getRequestId()).orElseThrow(
+					() -> new ResourceNotFoundException("Request not found with id : " + dto.getRequestId()));
+
+			items.setRequest(request);
+		}
+
+		requestItemRepo.save(items);
+
+		return "RequestItem Updated Successfully!";
 	}
 }

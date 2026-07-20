@@ -25,37 +25,33 @@ public class MatchServiceImpl implements MatchService {
 	private MatchesRepository matchRepo;
 	@Autowired
 	private UserRepository userRepo;
-@Autowired
-private RequestRepository requestRepo;
+	@Autowired
+	private RequestRepository requestRepo;
 
+	@Override
+	public String createMatch(MatchDTO request) {
+		Request donationRequest = requestRepo.findById(request.getDonationRequestId())
+				.orElseThrow(() -> new ResourceNotFoundException("Donation Request not found"));
 
-@Override
-public String createMatch(MatchDTO request) {
-	  Request donationRequest = requestRepo.findById(request.getDonationRequestId())
-              .orElseThrow(() ->
-                      new ResourceNotFoundException("Donation Request not found"));
+		Request receiverRequest = requestRepo.findById(request.getReceiverRequestId())
+				.orElseThrow(() -> new ResourceNotFoundException("Receiver Request not found"));
 
-      Request receiverRequest = requestRepo.findById(request.getReceiverRequestId())
-              .orElseThrow(() ->
-                      new ResourceNotFoundException("Receiver Request not found"));
+		User admin = userRepo.findById(request.getMatchedBy())
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-      User admin = userRepo.findById(request.getMatchedBy())
-              .orElseThrow(() ->
-                      new ResourceNotFoundException("User not found"));
+		Matches match = new Matches();
 
-      Matches match = new Matches();
+		match.setDonationRequest(donationRequest);
+		match.setReceiverRequest(receiverRequest);
+		match.setMatchedBy(admin);
+		match.setMatchStatus("PENDING");
+		match.setMatchedAt(LocalDateTime.now());
 
-      match.setDonationRequest(donationRequest);
-      match.setReceiverRequest(receiverRequest);
-      match.setMatchedBy(admin);
-      match.setMatchStatus("PENDING");
-      match.setMatchedAt(LocalDateTime.now());
+		matchRepo.save(match);
 
-      matchRepo.save(match);
+		return "Match Created Successfully";
+	}
 
-      return "Match Created Successfully";
-}
-	
 	@Override
 	public Matches findById(Long id) {
 		return matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
@@ -110,7 +106,5 @@ public String createMatch(MatchDTO request) {
 
 		return "Delivery Partner Assigned Successfully";
 	}
-
-
 
 }

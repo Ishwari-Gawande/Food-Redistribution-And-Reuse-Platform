@@ -29,7 +29,7 @@ public class DeliveryOutcomes {
 //	@OneToOne
 //	@JoinColumn(name="delievery_id")
 //	//@Column(name="delievery_id")
-//private Delieveries delieveries;
+//  private Deliveries delivery;
 
 	@Column(name = "outcome")
 	private String outcome;

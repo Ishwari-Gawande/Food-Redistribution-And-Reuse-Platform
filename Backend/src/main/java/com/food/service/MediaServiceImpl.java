@@ -10,46 +10,41 @@ import com.food.entities.User;
 import com.food.repository.MediaRepository;
 
 import jakarta.transaction.Transactional;
+
 @Service
 @Transactional
 public class MediaServiceImpl implements MediaService {
-@Autowired
-private MediaRepository mediaRepo;
+	@Autowired
+	private MediaRepository mediaRepo;
 
-@Override
-public String uploadImage(MultipartFile file,User user) {
-	Media media = new Media();
+	@Override
+	public String uploadImage(MultipartFile file, User user) {
+		Media media = new Media();
 
-    media.setFileName(file.getOriginalFilename());
-    media.setMimeType(file.getContentType());
-    media.setFilePath("uploads/" + file.getOriginalFilename());
-    media.setFileSize(file.getSize());
-    media.setCompressionRatio(null);   // optional
-    media.setUploadedBy(user);
+		media.setFileName(file.getOriginalFilename());
+		media.setMimeType(file.getContentType());
+		media.setFilePath("uploads/" + file.getOriginalFilename());
+		media.setFileSize(file.getSize());
+		media.setCompressionRatio(null); // optional
+		media.setUploadedBy(user);
 
-    mediaRepo.save(media);
+		mediaRepo.save(media);
 
-    return "Image Uploaded Successfully";
-}
+		return "Image Uploaded Successfully";
+	}
 
+	@Override
+	public Media findById(Long id) {
+		return mediaRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image not found"));
+	}
 
-@Override
-public Media findById(Long id) {
-	return mediaRepo.findById(id)
-            .orElseThrow(() ->
-                new ResourceNotFoundException("Image not found"));
-}
+	@Override
+	public String deleteImage(Long id) {
+		Media media = mediaRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Image not found"));
 
-@Override
-public String deleteImage(Long id) {
-	 Media media = mediaRepo.findById(id)
-	            .orElseThrow(() ->
-	                new ResourceNotFoundException("Image not found"));
+		mediaRepo.delete(media);
 
-	    mediaRepo.delete(media);
-
-	    return "Image Deleted Successfully";
-}
-
+		return "Image Deleted Successfully";
+	}
 
 }
