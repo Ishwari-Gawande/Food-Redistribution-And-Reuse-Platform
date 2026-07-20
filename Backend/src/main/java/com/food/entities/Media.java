@@ -54,6 +54,4 @@ public class Media {
 	@Column(name = "uploaded_at", nullable = false, updatable = false)
 	private LocalDateTime uploadedAt;
 
-//	@OneToMany(mappedBy ="media")
-//	List<Document>document=new ArrayList<>();
 }

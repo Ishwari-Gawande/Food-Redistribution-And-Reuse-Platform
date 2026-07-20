@@ -43,12 +43,8 @@ public class Deliveries {
 	@JoinColumn(name = "delivery_partner_id")
 	private User deliveryPartner;
 
-//	@OneToOne
-//	private Matches match;
 	@OneToOne
 	@JoinColumn(name = "match_id")
 	private Matches match;
 
-//	@OneToOne(mappedBy = "delivery")
-//	private DeliveryOutcomes outcomes;
 }

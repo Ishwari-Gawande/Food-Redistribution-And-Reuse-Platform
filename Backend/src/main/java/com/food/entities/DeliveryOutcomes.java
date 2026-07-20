@@ -26,10 +26,6 @@ public class DeliveryOutcomes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@OneToOne
-//	@JoinColumn(name="delievery_id")
-//	//@Column(name="delievery_id")
-//private Delieveries delieveries;
 
 	@Column(name = "outcome")
 	private String outcome;

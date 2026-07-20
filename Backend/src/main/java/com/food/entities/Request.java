@@ -63,9 +63,4 @@ public class Request {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-//	@OneToMany(mappedBy = "requestId")
-//	List<RequestItems>RequestItemId=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "donationRequestId")
-//List<Matches>donationRequestId=new ArrayList<>();
 }

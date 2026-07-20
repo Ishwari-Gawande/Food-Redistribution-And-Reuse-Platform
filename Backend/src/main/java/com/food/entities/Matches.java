@@ -48,6 +48,5 @@ public class Matches {
 	@ManyToOne
 	@JoinColumn(name = "delivery_partner_id")
 	private User deliveryPartner;
-//@OneToOne(mappedBy = "match")
-//private Deliveries delivery;
+
 }
