@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,13 +28,16 @@ public class Notification {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "User is required")
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
+    @NotBlank(message = "Title is required")
 	@Column(name = "title")
 	private String title;
 
+    @NotBlank(message = "Message is required")
 	@Column(name = "message")
 	private String message;
 
