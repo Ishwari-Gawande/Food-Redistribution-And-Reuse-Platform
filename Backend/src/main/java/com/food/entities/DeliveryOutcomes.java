@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,16 +28,18 @@ public class DeliveryOutcomes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-
-	@Column(name = "outcome")
+	@NotBlank(message = "Outcome is required")
+	@Column(name = "outcome",nullable = false)
 	private String outcome;
 
-	@Column(name = "remark")
+	@NotBlank(message = "Remark is required")
+	@Column(name = "remark",nullable = false)
 	private String remark;
 
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 
+    @NotNull(message = "Delivery is required")
 	@OneToOne
 	@JoinColumn(name = "delivery_id")
 	private Deliveries delivery;

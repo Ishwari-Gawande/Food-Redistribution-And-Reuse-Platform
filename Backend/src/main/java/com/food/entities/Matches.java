@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,24 +29,29 @@ public class Matches {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	 @NotNull(message = "Donation request is required")
 	@ManyToOne
 	@JoinColumn(name = "donation_request_id")
 	private Request donationRequest;
 
+	 @NotNull(message = "Receiver request is required")
 	@ManyToOne
 	@JoinColumn(name = "receiver_request_id")
 	private Request receiverRequest;
 
+	    @NotBlank(message = "Match status is required")
 	@Column(name = "match_status")
 	private String matchStatus;
 
 	@Column(name = "matched_at")
 	private LocalDateTime matchedAt;
 
+	@NotNull(message = "Matched by user is required")
 	@ManyToOne
 	@JoinColumn(name = "matched_by")
 	private User matchedBy;
 
+    @NotNull(message = "Delivery partner is required")
 	@ManyToOne
 	@JoinColumn(name = "delivery_partner_id")
 	private User deliveryPartner;
