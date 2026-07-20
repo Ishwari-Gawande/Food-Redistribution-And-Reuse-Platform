@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,20 +30,25 @@ public class ActivityLogs {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "User is required")
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 
 	private User user;
 
-	private String action;
+	 @NotBlank(message = "Action is required")
+	 @Column(nullable = false)
+	 private String action;
 
-	@Column(name = "entity_type")
+	 @NotBlank(message = "Entity type is required")
+	@Column(name = "entity_type",nullable = false)
 	private String entityType;
 
-	@Column(name = "entity_id")
+	   @NotBlank(message = "Entity ID is required")
+	@Column(name = "entity_id",nullable = false)
 	private String entityId;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at",nullable = false,updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 }

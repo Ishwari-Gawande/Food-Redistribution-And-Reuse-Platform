@@ -17,6 +17,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,29 +44,40 @@ public class User {
 	private Media profileMediaId;
 
 	@Column(length = 100, nullable = false)
+	@NotBlank(message="Name is required")
 	private String name;
 
+	@NotBlank(message="email is required")
+    @Email(message="Enter a valid email")
 	@Column(length = 255, unique = true, nullable = false)
 	private String email;
 
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters")
 	@Column(length = 255, nullable = false)
 	private String passwordHash;
 
+	@NotBlank(message = "Phone number is required")
+	@Pattern(regexp = "^[0-9]{10}$", message = "Enter a valid 10-digit phone number")
 	@Column(length = 15, nullable = false, unique = true)
 	private String phone;
 
+	@NotBlank(message = "Role is required")
 	@Column(name = "account_type", length = 20, nullable = false)
 	private String accountType;
 
 	@Column(name = "team_role", length = 30)
 	private String teamRole;
 
+	@NotBlank(message = "Status is required")
 	@Column(length = 20, nullable = false)
 	private String status;
 
+	@NotBlank(message = "Address is required")
 	@Column(length = 300, nullable = false)
 	private String address;
 
+	@NotBlank(message = "City is required")
 	@Column(length = 100, nullable = false)
 	private String city;
 
@@ -79,25 +95,5 @@ public class User {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
-//	@OneToMany(mappedBy = "uploadedBy")
-//	private List<Media>uploadedMedia=new ArrayList<>();
-//
-//	@OneToMany(mappedBy = "user")
-//	private List<Document>documents=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "user")
-//private List<Request>requests=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "user")
-//List<Notification> notifications=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "user")
-//List<ActivityLogs>activityLogs=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "deliveryPartnerId")
-//List<Deliveries>deliveryPartnerId=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "matchedBy")
-//List<Matches>matchedBy=new ArrayList<>();
 
 }

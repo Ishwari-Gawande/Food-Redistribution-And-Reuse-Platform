@@ -15,6 +15,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,27 +35,36 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+    @NotBlank(message = "Request type is required")
 	@Column(name = "request_type")
 	private String requestType;
 
+    @NotBlank(message = "Status is required")
 	@Column(name = "status")
 	private String status;
 
+    @NotBlank(message = "Meal preference is required")
 	@Column(name = "meal_preference")
 	private String mealPreference;
 
+    @NotNull(message = "Estimated meals is required")
+    @Positive(message = "Estimated meals must be greater than 0")
 	@Column(name = "estimated_meals")
 	private String estimatedMeals;
 
+    @NotBlank(message = "Pickup address is required")
 	@Column(name = "pickup_address")
 	private String pickUpAddress;
 
 	@Column(name = "delivery_available")
 	private boolean deliveryAvailable;
-
+	
+	@NotNull(message = "Needed by date is required")
+    @Future(message = "Needed by date must be in the future")
 	@Column(name = "needed_by")
 	private LocalDateTime neededBy;
 
+	@NotBlank(message = "Notes are required")
 	@Column(name = "notes")
 	private String notes;
 
@@ -59,13 +72,9 @@ public class Request {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
+	 @NotNull(message = "User is required")
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-//	@OneToMany(mappedBy = "requestId")
-//	List<RequestItems>RequestItemId=new ArrayList<>();
-//
-//@OneToMany(mappedBy = "donationRequestId")
-//List<Matches>donationRequestId=new ArrayList<>();
 }
