@@ -36,7 +36,7 @@ public class RequestController {
 
 	// find by id
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0") @PathVariable Long id) {
+	public ResponseEntity<?> findById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 
 		return ResponseEntity.ok(requestService.findById(id));
 	}
@@ -45,5 +45,10 @@ public class RequestController {
 	@GetMapping
 	public ResponseEntity<?> findAllRequests() {
 		return ResponseEntity.ok(requestService.findAllRequest());
+	}
+
+	// delete by id
+	public ResponseEntity<?> deleteById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
+		return ResponseEntity.ok(requestService.deleteById(id));
 	}
 }

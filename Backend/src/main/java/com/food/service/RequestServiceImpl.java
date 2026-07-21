@@ -75,4 +75,12 @@ public class RequestServiceImpl implements RequestService {
 		return requestRepo.findAll();
 	}
 
+	@Override
+	public String deleteById(Long id) {
+		Request request = requestRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Request not found"));
+		requestRepo.delete(request);
+		return "Request Deleted Successfully";
+	}
+
 }

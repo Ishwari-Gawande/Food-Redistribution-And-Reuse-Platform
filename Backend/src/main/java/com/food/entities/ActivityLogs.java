@@ -36,19 +36,19 @@ public class ActivityLogs {
 
 	private User user;
 
-	 @NotBlank(message = "Action is required")
-	 @Column(nullable = false)
-	 private String action;
+	@NotBlank(message = "Action is required")
+	@Column(nullable = false)
+	private String action;
 
-	 @NotBlank(message = "Entity type is required")
-	@Column(name = "entity_type",nullable = false)
+	@NotBlank(message = "Entity type is required")
+	@Column(name = "entity_type", nullable = false)
 	private String entityType;
 
-	   @NotBlank(message = "Entity ID is required")
-	@Column(name = "entity_id",nullable = false)
+	@NotBlank(message = "Entity ID is required")
+	@Column(name = "entity_id", nullable = false)
 	private String entityId;
 
-	@Column(name = "created_at",nullable = false,updatable = false)
+	@Column(name = "created_at", nullable = false, updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 }

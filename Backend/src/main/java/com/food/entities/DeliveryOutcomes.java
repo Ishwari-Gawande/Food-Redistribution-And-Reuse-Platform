@@ -28,21 +28,18 @@ public class DeliveryOutcomes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-<<<<<<< HEAD
-=======
 	@NotBlank(message = "Outcome is required")
-	@Column(name = "outcome",nullable = false)
->>>>>>> branch 'master' of https://github.com/Ishwari-Gawande/Food-Redistribution-And-Reuse-Platform
+	@Column(name = "outcome", nullable = false)
 	private String outcome;
 
 	@NotBlank(message = "Remark is required")
-	@Column(name = "remark",nullable = false)
+	@Column(name = "remark", nullable = false)
 	private String remark;
 
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 
-    @NotNull(message = "Delivery is required")
+	@NotNull(message = "Delivery is required")
 	@OneToOne
 	@JoinColumn(name = "delivery_id")
 	private Deliveries delivery;

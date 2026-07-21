@@ -13,4 +13,6 @@ public interface RequestService {
 	public Request findById(Long id);
 
 	public List<Request> findAllRequest();
+
+	public String deleteById(Long id);
 }
