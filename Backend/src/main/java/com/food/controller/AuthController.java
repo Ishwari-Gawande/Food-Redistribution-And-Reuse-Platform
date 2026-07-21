@@ -14,6 +14,7 @@ import com.food.DTO.RegisterDTO;
 import com.food.DTO.ResetPasswordDTO;
 import com.food.service.AuthServiceImpl;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,23 +25,23 @@ import lombok.RequiredArgsConstructor;
 	private final AuthServiceImpl authService;
 
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody RegisterDTO request) {
+	public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO request) {
 		return ResponseEntity.ok(authService.register(request));
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO request) {
+	public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginDTO request) {
 
 	    return ResponseEntity.ok(authService.logIn(request));
 	}
 
 	@PostMapping("/forgot-password")
-	public ResponseEntity<?> forgotPassword(@RequestBody ForgetPasswordDTO request) {
+	public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgetPasswordDTO request) {
 		return ResponseEntity.ok(authService.forgotPassword(request));
 	}
 
 	@PostMapping("/reset-password")
-	public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO request) {
+	public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordDTO request) {
 		return ResponseEntity.ok(authService.resetPassword(request));
 	}
 }

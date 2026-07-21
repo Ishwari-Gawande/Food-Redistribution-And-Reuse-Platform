@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.food.DTO.NotificationDTO;
 import com.food.service.NotificationServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/notification")
 
@@ -22,7 +24,7 @@ public class NotificationController {
 	private NotificationServiceImpl notificationService;
 
 	@PostMapping
-	public ResponseEntity<?> sendNotification(@RequestBody NotificationDTO request) {
+	public ResponseEntity<?> sendNotification(@Valid @RequestBody NotificationDTO request) {
 
 		return ResponseEntity.ok(notificationService.sendNotification(request));
 	}

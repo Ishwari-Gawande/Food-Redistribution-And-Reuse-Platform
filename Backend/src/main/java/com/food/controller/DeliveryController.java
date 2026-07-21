@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.food.DTO.DeliveryDTO;
 import com.food.service.DelieveryServiceImpl;
+
+import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/deliveries")
 public class DeliveryController {
@@ -19,7 +21,7 @@ public class DeliveryController {
 private DelieveryServiceImpl deliveryService;
 	@PostMapping
 	public ResponseEntity<?> createDelivery(
-	        @RequestBody DeliveryDTO request){
+	       @Valid @RequestBody DeliveryDTO request){
 
 	    return ResponseEntity.ok(
 	            deliveryService.createDelivery(request));

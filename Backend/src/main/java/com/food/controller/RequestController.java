@@ -13,6 +13,7 @@ import com.food.DTO.RequestDTO;
 import com.food.DTO.RequestResponseDTO;
 import com.food.service.RequestServiceImpl;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,7 +25,7 @@ public class RequestController {
 
 	// add new request
 	@PostMapping
-	public ResponseEntity<RequestResponseDTO> addNewRequest(@RequestBody RequestDTO dto) {
+	public ResponseEntity<RequestResponseDTO> addNewRequest(@Valid @RequestBody RequestDTO dto) {
 
 		RequestResponseDTO response = requestService.AddNewRequest(dto);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);

@@ -13,6 +13,7 @@ import com.food.DTO.AssignDeliveryDTO;
 import com.food.DTO.MatchDTO;
 import com.food.service.MatchServiceImpl;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,7 +24,7 @@ public class MatchesController {
 	private final MatchServiceImpl matchService;
 
 	 @PostMapping
-	    public ResponseEntity<?> createMatch(@RequestBody MatchDTO request) {
+	    public ResponseEntity<?> createMatch(@Valid @RequestBody MatchDTO request) {
 
 	        return ResponseEntity.ok(matchService.createMatch(request));
 	    }
@@ -62,7 +63,7 @@ public class MatchesController {
 	@PutMapping("/{id}/assign-delivery")
 	public ResponseEntity<?> assignDeliveryPartner(
 	        @PathVariable Long id,
-	        @RequestBody AssignDeliveryDTO request) {
+	     @Valid @RequestBody AssignDeliveryDTO request) {
 
 	    return ResponseEntity.ok(
 	            matchService.assignDeliveryPartner(id, request));

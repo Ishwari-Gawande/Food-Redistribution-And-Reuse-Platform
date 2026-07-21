@@ -14,6 +14,7 @@ import com.food.DTO.UserDTO;
 import com.food.repository.UserRepository;
 import com.food.service.UserServiceImpl;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,13 +28,8 @@ public class UserController {
 
 	private final UserServiceImpl userService;
 
-//	UserController(AuthController authController, UserRepository userRepository) {
-//		this.authController = authController;
-//		this.userRepository = userRepository;
-//	}
-
 	@PostMapping
-	public ResponseEntity<?> addNewUser(@RequestBody UserDTO request) {
+	public ResponseEntity<?> addNewUser(@Valid @RequestBody UserDTO request) {
 		return ResponseEntity.ok(userService.addNewUser(request));
 	}
 
@@ -56,7 +52,7 @@ public class UserController {
 
 //Update User
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO request) {
+	public ResponseEntity<?> updateUser(@PathVariable Long id,@Valid @RequestBody UserDTO request) {
 		return ResponseEntity.ok(userService.updateUser(id, request));
 	}
 
@@ -68,7 +64,7 @@ public class UserController {
 
 //update profile
 	@PutMapping("/profile")
-	public ResponseEntity<?> updateProfile(@RequestBody UserDTO request) {
+	public ResponseEntity<?> updateProfile(@Valid @RequestBody UserDTO request) {
 
 		return ResponseEntity.ok(userService.updateProfile(request));
 	}
