@@ -210,7 +210,7 @@ body{
 
 /* ---------------- IMPACT CARD ---------------- */
 
-.impact-card{
+.impact-cardlogin{
     position:absolute;
     left:18px;
     bottom:18px;
@@ -222,18 +222,28 @@ body{
     color:#fff;
 }
 
-.impact-card h6{
+.impact-cardlogin small{
+        background:rgba(255,255,255,.18);
+    color: white;
+}
+
+.impact-cardlogin h6{
+        background:rgba(255,255,255,.18);
     font-size:13px;
     margin-bottom:10px;
     letter-spacing:.5px;
 }
 
-.impact-card h3{
+.impact-cardlogin h3{
+        background:rgba(255,255,255,.18);
+    color:white;
     font-size:32px;
     margin-bottom:10px;
 }
 
-.impact-card p{
+.impact-cardlogin p{
+        background:rgba(255,255,255,.18);
+        color:white;
     font-size:14px;
     line-height:1.5;
 }

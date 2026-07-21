@@ -16,15 +16,21 @@ function Login() {
 
         try {
 
-            const response = await axios.post(
+            const response = await axios.post( 
                 "http://localhost:8080/food/api/auth/login",
                 {
                     email,
                     password
                 }
             );
+//here our response.data={       after backend respond
+// "id":5,
+// "name":"Ishwari",
+// "accountType":"DONOR"
+// }
 
-            localStorage.setItem("user", JSON.stringify(response.data));
+            localStorage.setItem("user", JSON.stringify(response.data));//stringify is doing object to string conversion
+            //because local storage store the data in string form not object
 
             const role = response.data.accountType;
 
@@ -201,11 +207,11 @@ function Login() {
                                 alt="Login"
                             />
 
-                            <div className="impact-card">
+                            <div className="impact-cardlogin">
 
                                 <small>IMPACT METRIC</small>
 
-                                <h3>2.4M Tons</h3>
+                               <h3>2.4M Tons</h3>
 
                                 <p>
                                     of waste diverted from landfills collectively by our community.

@@ -239,7 +239,7 @@ body{
 
 /* ================= IMPACT CARD ================= */
 
-.impact-card{
+.impact-cardregister{
 
     position:absolute;
     left:20px;
@@ -259,21 +259,21 @@ body{
 
 }
 
-.impact-card small{
+.impact-cardregister small{
 
     font-size:12px;
     letter-spacing:1px;
 
 }
 
-.impact-card h3{
+.impact-cardregister h3{
 
     font-size:34px;
     margin:8px 0;
 
 }
 
-.impact-card p{
+.impact-cardregister p{
 
     font-size:14px;
     line-height:1.5;

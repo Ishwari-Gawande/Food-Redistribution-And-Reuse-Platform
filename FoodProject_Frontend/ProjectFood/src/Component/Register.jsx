@@ -21,7 +21,7 @@ function Register() {
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value   //e.target.name suppose give "name" and e.target.value will give user entered name
         });
     };
 
@@ -261,7 +261,7 @@ function Register() {
                                 alt="Register"
                             />
 
-                            <div className="impact-card">
+                            <div className="impact-cardregister">
 
                                 <small>JOIN OUR MISSION</small>
 
