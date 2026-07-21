@@ -17,6 +17,7 @@ import com.food.service.DocumentService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/api/documents")
@@ -33,7 +34,7 @@ public class DocumentController {
 	}
 
 	 @GetMapping("/{id}")
-	    public ResponseEntity<?> findById(@PathVariable Long id) {
+	    public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 
 	        return ResponseEntity.ok(documentService.findById(id));
 	    }

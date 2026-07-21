@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.food.service.MediaServiceImpl;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/api/media")
@@ -31,7 +32,7 @@ public class MediaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(
+    public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0")
             @PathVariable Long id) {
 
         return ResponseEntity.ok(mediaService.findById(id));

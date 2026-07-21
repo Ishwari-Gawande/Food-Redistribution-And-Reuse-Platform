@@ -2,6 +2,7 @@ package com.food.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,10 @@ import com.food.DTO.DeliveryDTO;
 import com.food.service.DelieveryServiceImpl;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 @RestController
 @RequestMapping("/deliveries")
+@Validated
 public class DeliveryController {
 @Autowired
 private DelieveryServiceImpl deliveryService;
@@ -28,7 +31,7 @@ private DelieveryServiceImpl deliveryService;
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable Long id){
+	public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0")@PathVariable Long id){
 
 	    return ResponseEntity.ok(
 	            deliveryService.findById(id));

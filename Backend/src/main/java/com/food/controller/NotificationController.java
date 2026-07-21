@@ -3,6 +3,7 @@ package com.food.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +16,11 @@ import com.food.DTO.NotificationDTO;
 import com.food.service.NotificationServiceImpl;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/notification")
-
+@Validated
 public class NotificationController {
 @Autowired
 	private NotificationServiceImpl notificationService;
@@ -36,7 +38,7 @@ public class NotificationController {
 	}
 
 	@PutMapping("/{id}/read")
-	public ResponseEntity<?> markAsRead(@PathVariable Long id) {
+	public ResponseEntity<?> markAsRead( @Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 
 		return ResponseEntity.ok(notificationService.markAsRead(id));
 	}

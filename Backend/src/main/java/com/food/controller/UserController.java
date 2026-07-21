@@ -1,6 +1,7 @@
 package com.food.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,13 @@ import com.food.repository.UserRepository;
 import com.food.service.UserServiceImpl;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@Validated
 public class UserController {
 
 	private final UserRepository userRepository;
@@ -34,7 +37,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable Long id) {
+	public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
