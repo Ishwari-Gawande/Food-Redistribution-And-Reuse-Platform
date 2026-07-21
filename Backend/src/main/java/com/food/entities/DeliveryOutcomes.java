@@ -28,12 +28,10 @@ public class DeliveryOutcomes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-<<<<<<< HEAD
-=======
+
 	@NotBlank(message = "Outcome is required")
 	@Column(name = "outcome",nullable = false)
->>>>>>> branch 'master' of https://github.com/Ishwari-Gawande/Food-Redistribution-And-Reuse-Platform
-	private String outcome;
+private String outcome;
 
 	@NotBlank(message = "Remark is required")
 	@Column(name = "remark",nullable = false)
