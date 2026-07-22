@@ -25,7 +25,7 @@ import com.food.repository.UserRepository;
 import jakarta.transaction.Transactional;
 @Service
 @Transactional
-public class DelieveryServiceImpl implements DeliveryService{
+public class DeliveryServiceImpl implements DeliveryService{
 	@Autowired
 	private MatchesRepository matchRepo;
 	@Autowired

@@ -60,7 +60,7 @@ public class Request {
 	private boolean deliveryAvailable;
 
 	@NotNull(message = "Needed by date is required")
-	@Future(message = "Needed by date must be in the future")
+	//@Future(message = "Needed by date must be in the future")
 	@Column(name = "needed_by")
 	private LocalDateTime neededBy;
 

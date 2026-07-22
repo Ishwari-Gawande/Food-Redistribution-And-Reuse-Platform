@@ -1,6 +1,5 @@
 package com.food.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,36 +11,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.food.service.MediaServiceImpl;
+import com.food.service.MediaService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/media")
+@RequiredArgsConstructor
 @Validated
 public class MediaController {
-	@Autowired
-    private MediaServiceImpl mediaService;
 
-    @PostMapping
-    public ResponseEntity<?> uploadImage(
-    		 @NotNull(message = "File is required") @RequestParam("file") MultipartFile file) {
+	private final MediaService mediaService;
 
-        return ResponseEntity.ok(mediaService.uploadImage(file, null));
-    }
+	@PostMapping
+	public ResponseEntity<?> uploadImage(
+			@NotNull(message = "File is required") @RequestParam("file") MultipartFile file) {
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0")
-            @PathVariable Long id) {
+		return ResponseEntity.ok(mediaService.uploadImage(file, null));
+	}
 
-        return ResponseEntity.ok(mediaService.findById(id));
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteImage(
-            @PathVariable Long id) {
+		return ResponseEntity.ok(mediaService.findById(id));
+	}
 
-        return ResponseEntity.ok(mediaService.deleteImage(id));
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteImage(@PathVariable Long id) {
+
+		return ResponseEntity.ok(mediaService.deleteImage(id));
+	}
 }

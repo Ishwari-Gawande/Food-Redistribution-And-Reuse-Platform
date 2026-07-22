@@ -12,7 +12,7 @@ import com.food.DTO.LoginDTO;
 import com.food.DTO.LoginResponseDTO;
 import com.food.DTO.RegisterDTO;
 import com.food.DTO.ResetPasswordDTO;
-import com.food.service.AuthServiceImpl;
+import com.food.service.AuthService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:5173")public class AuthController {
 
-	private final AuthServiceImpl authService;
+	private final AuthService authService;
 
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO request) {

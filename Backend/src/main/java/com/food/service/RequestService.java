@@ -17,4 +17,14 @@ public interface RequestService {
 	public String deleteById(Long id);
 
 	public List<Request> findByStatus(String status);
+
+	public List<Request> findMyRequest(Long userId);
+
+	public Request submitRequest(Long id);
+
+	public Request cancelRequest(Long id);
+
+	public List<RequestResponseDTO> findRequestHistory(Long id);
+
+	public String updateRequest(Long id, RequestDTO dto);
 }

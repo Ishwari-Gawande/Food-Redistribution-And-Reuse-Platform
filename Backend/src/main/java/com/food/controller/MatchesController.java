@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.food.DTO.AssignDeliveryDTO;
 import com.food.DTO.MatchDTO;
-import com.food.service.MatchServiceImpl;
+import com.food.service.MatchService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -24,16 +24,16 @@ import lombok.RequiredArgsConstructor;
 @Validated
 public class MatchesController {
 
-	private final MatchServiceImpl matchService;
+	private final MatchService matchService;
 
-	 @PostMapping
-	    public ResponseEntity<?> createMatch(@Valid @RequestBody MatchDTO request) {
+	@PostMapping
+	public ResponseEntity<?> createMatch(@Valid @RequestBody MatchDTO request) {
 
-	        return ResponseEntity.ok(matchService.createMatch(request));
-	    }
-	
+		return ResponseEntity.ok(matchService.createMatch(request));
+	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0") @PathVariable Long id) {
+	public ResponseEntity<?> findById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 		return ResponseEntity.ok(matchService.findById(id));
 	}
 
@@ -48,28 +48,26 @@ public class MatchesController {
 		return ResponseEntity.ok(matchService.findPendingMatches());
 
 	}
-	
+
 	@PutMapping("/{id}/approve")
 	public ResponseEntity<?> approveMatch(@PathVariable Long id) {
 
-	    return ResponseEntity.ok(matchService.approveMatch(id));
+		return ResponseEntity.ok(matchService.approveMatch(id));
 
 	}
-	
+
 	@PutMapping("/{id}/reject")
 	public ResponseEntity<?> rejectMatch(@PathVariable Long id) {
 
-	    return ResponseEntity.ok(matchService.rejectMatch(id));
+		return ResponseEntity.ok(matchService.rejectMatch(id));
 
 	}
-	
-	@PutMapping("/{id}/assign-delivery")
-	public ResponseEntity<?> assignDeliveryPartner(
-	        @PathVariable Long id,
-	     @Valid @RequestBody AssignDeliveryDTO request) {
 
-	    return ResponseEntity.ok(
-	            matchService.assignDeliveryPartner(id, request));
+	@PutMapping("/{id}/assign-delivery")
+	public ResponseEntity<?> assignDeliveryPartner(@PathVariable Long id,
+			@Valid @RequestBody AssignDeliveryDTO request) {
+
+		return ResponseEntity.ok(matchService.assignDeliveryPartner(id, request));
 
 	}
 }

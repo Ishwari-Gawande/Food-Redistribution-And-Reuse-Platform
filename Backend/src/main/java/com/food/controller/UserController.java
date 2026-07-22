@@ -37,7 +37,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0") @PathVariable Long id) {
+	public ResponseEntity<?> findById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 
@@ -55,7 +55,7 @@ public class UserController {
 
 //Update User
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable Long id,@Valid @RequestBody UserDTO request) {
+	public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO request) {
 		return ResponseEntity.ok(userService.updateUser(id, request));
 	}
 

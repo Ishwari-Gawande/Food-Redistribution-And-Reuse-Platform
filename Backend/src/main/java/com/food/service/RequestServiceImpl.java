@@ -85,8 +85,69 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public List<Request> findByStatus(String status) {
-
 		return requestRepo.findByStatus(status);
+	}
+
+	@Override
+	public List<Request> findMyRequest(Long userId) {
+		return requestRepo.findByUserId(userId);
+	}
+
+	@Override
+	public Request submitRequest(Long id) {
+		Request request = requestRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!"));
+		request.setStatus("SUBMITTED");
+		return requestRepo.save(request);
+	}
+
+	@Override
+	public Request cancelRequest(Long id) {
+		Request request = requestRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!"));
+		request.setStatus("CANCELLED");
+		return requestRepo.save(request);
+	}
+
+	@Override
+	public List<RequestResponseDTO> findRequestHistory(Long userId) {
+		List<Request> requests = requestRepo.findByUserId(userId);
+
+		return requests.stream().map(request -> {
+
+			RequestResponseDTO dto = new RequestResponseDTO();
+
+			dto.setId(request.getId());
+			dto.setRequestType(request.getRequestType());
+			dto.setStatus(request.getStatus());
+			dto.setMealPreference(request.getMealPreference());
+			dto.setEstimatedMeals(request.getEstimatedMeals());
+			dto.setNeededBy(request.getNeededBy());
+			dto.setCreatedAt(request.getCreatedAt());
+
+			return dto;
+
+		}).toList();
+	}
+
+	@Override
+	public String updateRequest(Long id, RequestDTO dto) {
+		Request request = requestRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!!"));
+
+		request.setRequestType(dto.getRequestType());
+		request.setStatus(dto.getStatus());
+		request.setMealPreference(dto.getMealPreference());
+		request.setEstimatedMeals(dto.getEstimatedMeals());
+		request.setPickUpAddress(dto.getPickUpAddress());
+		request.setDeliveryAvailable(dto.isDeliveryAvailable());
+		request.setNeededBy(dto.getNeededBy());
+		request.setNotes(dto.getNotes());
+		request.setCreatedAt(LocalDateTime.now());
+
+		requestRepo.save(request);
+
+		return "Request Updated Successfully!";
 	}
 
 }

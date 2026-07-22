@@ -1,6 +1,5 @@
 package com.food.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,59 +11,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.food.DTO.DeliveryDTO;
-import com.food.service.DelieveryServiceImpl;
+import com.food.service.DeliveryService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/deliveries")
+@RequiredArgsConstructor
 @Validated
 public class DeliveryController {
-@Autowired
-private DelieveryServiceImpl deliveryService;
+
+	private final DeliveryService deliveryService;
+
 	@PostMapping
-	public ResponseEntity<?> createDelivery(
-	       @Valid @RequestBody DeliveryDTO request){
+	public ResponseEntity<?> createDelivery(@Valid @RequestBody DeliveryDTO request) {
 
-	    return ResponseEntity.ok(
-	            deliveryService.createDelivery(request));
+		return ResponseEntity.ok(deliveryService.createDelivery(request));
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById( @Positive(message = "Id must be greater than 0")@PathVariable Long id){
+	public ResponseEntity<?> findById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 
-	    return ResponseEntity.ok(
-	            deliveryService.findById(id));
+		return ResponseEntity.ok(deliveryService.findById(id));
 	}
-	
+
 	@GetMapping("/assigned")
-	public ResponseEntity<?> findAssignedDeliveries(){
+	public ResponseEntity<?> findAssignedDeliveries() {
 
-	    return ResponseEntity.ok(
-	            deliveryService.findAssignedDeliveries());
+		return ResponseEntity.ok(deliveryService.findAssignedDeliveries());
 	}
-	
+
 	@PutMapping("/{id}/start")
-	public ResponseEntity<?> startDelivery(
-	        @PathVariable Long id){
+	public ResponseEntity<?> startDelivery(@PathVariable Long id) {
 
-	    return ResponseEntity.ok(
-	            deliveryService.startDelivery(id));
+		return ResponseEntity.ok(deliveryService.startDelivery(id));
 	}
-	
+
 	@PutMapping("/{id}/complete")
-	public ResponseEntity<?> completeDelivery(
-	        @PathVariable Long id){
+	public ResponseEntity<?> completeDelivery(@PathVariable Long id) {
 
-	    return ResponseEntity.ok(
-	            deliveryService.completeDelivery(id));
+		return ResponseEntity.ok(deliveryService.completeDelivery(id));
 	}
-	
-	@GetMapping("/{id}/track")
-	public ResponseEntity<?> trackDelivery(
-	        @PathVariable Long id){
 
-	    return ResponseEntity.ok(
-	            deliveryService.trackDelivery(id));
+	@GetMapping("/{id}/track")
+	public ResponseEntity<?> trackDelivery(@PathVariable Long id) {
+
+		return ResponseEntity.ok(deliveryService.trackDelivery(id));
 	}
 }
