@@ -18,40 +18,35 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
 	private final JWTAuthenticationFilter jwtAuthenticationFilter;
-	
+
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
-		
-		http
-        .csrf(csrf -> csrf.disable())
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        .sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		http.csrf(csrf -> csrf.disable())
 
-        .authorizeHttpRequests(auth -> auth
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                .requestMatchers( "/swagger-ui/**",
-                        "/v3/api-docs/**",
-                        "/swagger-ui.html").permitAll()
+				.authorizeHttpRequests(auth -> auth
 
-                .anyRequest().authenticated()
-        )
+						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/auth/**")
+						.permitAll()
 
-        .addFilterBefore(jwtAuthenticationFilter,
-                UsernamePasswordAuthenticationFilter.class);
+						.anyRequest().authenticated())
 
-    return http.build();
-	
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+		return http.build();
+
 	}
-	 @Bean
-	    PasswordEncoder passwordEncoder() {
-	        return new BCryptPasswordEncoder();
-	    }
 
-	    @Bean
-	    AuthenticationManager authenticationManager(
-	            AuthenticationConfiguration configuration) throws Exception {
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-	        return configuration.getAuthenticationManager();
-	    }
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+
+		return configuration.getAuthenticationManager();
+	}
 }
