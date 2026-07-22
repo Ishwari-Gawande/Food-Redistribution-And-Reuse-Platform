@@ -40,9 +40,11 @@ button {
 .d-lg-none {
   display: inline-flex;
 }
+
 .d-none {
   display: none;
 }
+
 .d-sm-flex {
   display: none;
 }

@@ -8,11 +8,13 @@ import com.food.entities.Request;
 
 public interface RequestService {
 
-	public RequestResponseDTO AddNewRequest(RequestDTO dto);
+	public RequestResponseDTO addNewRequest(RequestDTO dto);
 
 	public Request findById(Long id);
 
 	public List<Request> findAllRequest();
 
 	public String deleteById(Long id);
+
+	public List<Request> findByStatus(String status);
 }

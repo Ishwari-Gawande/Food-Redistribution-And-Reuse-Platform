@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.food.DTO.RequestDTO;
 import com.food.DTO.RequestResponseDTO;
-import com.food.service.RequestServiceImpl;
+import com.food.service.RequestService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -25,13 +25,13 @@ import lombok.RequiredArgsConstructor;
 @Validated
 public class RequestController {
 
-	private final RequestServiceImpl requestService;
+	private final RequestService requestService;
 
 	// add new request
 	@PostMapping
 	public ResponseEntity<RequestResponseDTO> addNewRequest(@Valid @RequestBody RequestDTO dto) {
 
-		RequestResponseDTO response = requestService.AddNewRequest(dto);
+		RequestResponseDTO response = requestService.addNewRequest(dto);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
@@ -49,8 +49,14 @@ public class RequestController {
 	}
 
 	// delete by id
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@Positive(message = "Id must be greater than 0") @PathVariable Long id) {
 		return ResponseEntity.ok(requestService.deleteById(id));
+	}
+
+	// find by status
+	@GetMapping("/active")
+	public ResponseEntity<?> findActiveRequest() {
+		return ResponseEntity.ok(requestService.findByStatus("ACTIVE"));
 	}
 }

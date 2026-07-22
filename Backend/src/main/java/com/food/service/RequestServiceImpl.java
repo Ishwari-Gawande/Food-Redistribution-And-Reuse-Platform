@@ -25,7 +25,7 @@ public class RequestServiceImpl implements RequestService {
 	private final RequestRepository requestRepo;
 
 	@Override
-	public RequestResponseDTO AddNewRequest(RequestDTO dto) {
+	public RequestResponseDTO addNewRequest(RequestDTO dto) {
 
 		User user = userRepo.findById(dto.getUserId())
 				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -82,7 +82,11 @@ public class RequestServiceImpl implements RequestService {
 		requestRepo.delete(request);
 		return "Request Deleted Successfully";
 	}
-	
-	
+
+	@Override
+	public List<Request> findByStatus(String status) {
+
+		return requestRepo.findByStatus(status);
+	}
 
 }

@@ -35,32 +35,32 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    @NotBlank(message = "Request type is required")
+	@NotBlank(message = "Request type is required")
 	@Column(name = "request_type")
 	private String requestType;
 
-    @NotBlank(message = "Status is required")
+	@NotBlank(message = "Status is required")
 	@Column(name = "status")
 	private String status;
 
-    @NotBlank(message = "Meal preference is required")
+	@NotBlank(message = "Meal preference is required")
 	@Column(name = "meal_preference")
 	private String mealPreference;
 
-    @NotNull(message = "Estimated meals is required")
-    @Positive(message = "Estimated meals must be greater than 0")
+	@NotNull(message = "Estimated meals is required")
+	@Positive(message = "Estimated meals must be greater than 0")
 	@Column(name = "estimated_meals")
 	private String estimatedMeals;
 
-    @NotBlank(message = "Pickup address is required")
+	@NotBlank(message = "Pickup address is required")
 	@Column(name = "pickup_address")
 	private String pickUpAddress;
 
 	@Column(name = "delivery_available")
 	private boolean deliveryAvailable;
-	
+
 	@NotNull(message = "Needed by date is required")
-    @Future(message = "Needed by date must be in the future")
+	@Future(message = "Needed by date must be in the future")
 	@Column(name = "needed_by")
 	private LocalDateTime neededBy;
 
@@ -72,7 +72,7 @@ public class Request {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-	 @NotNull(message = "User is required")
+	@NotNull(message = "User is required")
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
