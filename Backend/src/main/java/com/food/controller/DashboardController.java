@@ -16,8 +16,10 @@ public class DashboardController {
 
 	private final DashboardService dashboardService;
 
+	//Admin dashboard
 	@GetMapping("/admin")
 	public ResponseEntity<?> getAdminDashboard() {
 		return ResponseEntity.ok(dashboardService.getAdminDashboard());
 	}
+
 }
