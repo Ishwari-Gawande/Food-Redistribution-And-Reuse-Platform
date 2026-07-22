@@ -33,7 +33,6 @@ public class ActivityLogs {
 	@NotNull(message = "User is required")
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-
 	private User user;
 
 	@NotBlank(message = "Action is required")
