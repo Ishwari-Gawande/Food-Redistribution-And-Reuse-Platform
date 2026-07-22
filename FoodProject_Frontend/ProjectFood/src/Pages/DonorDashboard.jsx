@@ -100,9 +100,9 @@ const activities = [
   }
 ];
 
-/* ==========================================================================
+/* 
    COMPONENT
-   ========================================================================== */
+    */
 
 const DonorDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
