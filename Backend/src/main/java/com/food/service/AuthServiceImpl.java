@@ -10,6 +10,7 @@ import com.food.DTO.ResetPasswordDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.User;
 import com.food.repository.UserRepository;
+import com.food.secuirity.JWTService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class AuthServiceImpl implements AuthService {
 
 	private final UserRepository userRepo;
 
+	private final JWTService jwtService;
 	@Override
 	public String register(RegisterDTO registerRequest) {
 
@@ -54,11 +56,13 @@ public class AuthServiceImpl implements AuthService {
 		        throw new ResourceNotFoundException("Invalid Password");
 		    }
 
+		    String token = jwtService.generateToken(user.getEmail());
 		    return new LoginResponseDTO(
 		            "Login Successful",
 		            user.getId(),
 		            user.getName(),
-		            user.getAccountType()
+		            user.getAccountType(),
+		            token
 		    );
 	}
 	@Override
