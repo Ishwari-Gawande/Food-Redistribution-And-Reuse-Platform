@@ -3,6 +3,7 @@ package com.food.DTO;
 import java.time.LocalDateTime;
 
 import com.food.entities.RequestStatus;
+import com.food.entities.RequestType;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
@@ -17,8 +18,8 @@ public class RequestDTO {
 	@NotNull(message = "User ID is required")
 	private Long userId;
 
-	@NotBlank(message = "Request type is required")
-	private String requestType;
+	@NotNull(message = "Request type is required")
+	private RequestType requestType;
 
 	@NotNull(message = "Status is required")
 	private RequestStatus status;

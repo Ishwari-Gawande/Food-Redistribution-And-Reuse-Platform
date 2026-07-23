@@ -33,9 +33,10 @@ public class Request {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Request type is required")
+	@NotNull(message = "Request type is required")
 	@Column(name = "request_type")
-	private String requestType;
+	@Enumerated(EnumType.STRING)
+	private RequestType requestType;
 
 	@NotNull(message = "Status is required")
 	@Column(name = "status")

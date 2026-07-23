@@ -3,6 +3,7 @@ package com.food.DTO;
 import java.time.LocalDateTime;
 
 import com.food.entities.RequestStatus;
+import com.food.entities.RequestType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ public class RequestResponseDTO {
 
 	private Long id;
 
-	private String requestType;
+	private RequestType requestType;
 
 	private RequestStatus status;
 

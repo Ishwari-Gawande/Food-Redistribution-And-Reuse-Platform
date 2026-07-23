@@ -13,6 +13,6 @@ public class LoginResponseDTO {
 	  private String message;
 	    private Long userId;
 	    private String name;
-	    private String accountType;
+		private String accountType;
 	    private String token;
 }

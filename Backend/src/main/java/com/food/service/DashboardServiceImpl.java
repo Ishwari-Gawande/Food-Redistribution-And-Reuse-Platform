@@ -1,14 +1,21 @@
 package com.food.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.food.DTO.AdminDashboardDTO;
 import com.food.DTO.DonorDashboardDTO;
+import com.food.DTO.ImpactDashboardDTO;
+import com.food.DTO.MonthlyStatisticsDTO;
 import com.food.entities.DeliveryStatus;
 import com.food.entities.RequestStatus;
+import com.food.entities.Role;
 import com.food.entities.UserStatus;
 import com.food.repository.DelieveryRepository;
 import com.food.repository.MatchesRepository;
+import com.food.repository.RequestItemRepository;
 import com.food.repository.RequestRepository;
 import com.food.repository.UserRepository;
 
@@ -24,6 +31,7 @@ public class DashboardServiceImpl implements DashboardService {
 	private final RequestRepository reqRepo;
 	private final MatchesRepository matchRepo;
 	private final DelieveryRepository deliveryRepo;
+	private final RequestItemRepository itemRepo;
 
 	@Override
 	public AdminDashboardDTO getAdminDashboard() {
@@ -61,6 +69,46 @@ public class DashboardServiceImpl implements DashboardService {
 		dto.setTotalRequests(reqRepo.countByUser_Id(userId));
 
 		return dto;
+	}
+
+	@Override
+	public ImpactDashboardDTO getImpactDashboard() {
+
+		ImpactDashboardDTO dto = new ImpactDashboardDTO();
+
+		dto.setTotalCompletedDonations(reqRepo.countByStatus(RequestStatus.COMPLETED));
+
+		dto.setTotalCompletedDeliveries(deliveryRepo.countByStatus(DeliveryStatus.COMPLETED));
+
+//		dto.setTotalDonors(userRepo.countByRole(Role.DONOR));
+//
+//		dto.setTotalReceivers(userRepo.countByRole(Role.RECEIVER));
+
+		dto.setTotalMatches(matchRepo.count());
+
+		dto.setTotalFoodQuantity(itemRepo.getTotalFoodQuantity());
+
+		return dto;
+	}
+
+	@Override
+	public List<MonthlyStatisticsDTO> getMonthlyStatistics() {
+
+		List<Object[]> result = reqRepo.getMonthlyDonations();
+
+		List<MonthlyStatisticsDTO> statistics = new ArrayList<>();
+
+		String[] months = { "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+		for (Object[] row : result) {
+
+			Integer monthNo = (Integer) row[0];
+			Long total = (Long) row[1];
+
+			statistics.add(new MonthlyStatisticsDTO(months[monthNo], total));
+		}
+
+		return statistics;
 	}
 
 }

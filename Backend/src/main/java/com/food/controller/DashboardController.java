@@ -26,11 +26,24 @@ public class DashboardController {
 	}
 
 	// Donor Dashboard
-	@GetMapping("/donor")
+	@GetMapping("/donor/{userId}")
 	public ResponseEntity<?> getDonorDashboard(
 			@Positive(message = "Id must be greater than 0") @PathVariable Long userId) {
 		System.out.println("Donor Dashboard API is Called!");
 		return ResponseEntity.ok(dashboardService.getDonorDashboard(userId));
 	}
 
+	// Impact Dashboard
+	@GetMapping("/impact")
+	public ResponseEntity<?> getImpactDashboard() {
+		System.out.println("Impact Dashboard API is Called!");
+		return ResponseEntity.ok(dashboardService.getImpactDashboard());
+	}
+
+	// Monthly Statistics
+	@GetMapping("/statistics")
+	public ResponseEntity<?> getMonthlyStatistics() {
+		System.out.println("Monthly Statistics API is Called!");
+		return ResponseEntity.ok(dashboardService.getMonthlyStatistics());
+	}
 }
