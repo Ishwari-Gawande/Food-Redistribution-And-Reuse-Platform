@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import com.food.DTO.AdminDashboardDTO;
 import com.food.DTO.DonorDashboardDTO;
+import com.food.entities.DeliveryStatus;
+import com.food.entities.RequestStatus;
+import com.food.entities.UserStatus;
 import com.food.repository.DelieveryRepository;
 import com.food.repository.MatchesRepository;
 import com.food.repository.RequestRepository;
@@ -29,17 +32,17 @@ public class DashboardServiceImpl implements DashboardService {
 
 		dto.setTotalUsers(userRepo.count());
 
-		dto.setPendingUsers(userRepo.countByStatus("PENDING"));
+		dto.setPendingUsers(userRepo.countByStatus(UserStatus.PENDING));
 
 		dto.setTotalRequests(reqRepo.count());
 
-		dto.setPendingRequests(reqRepo.countByStatus("PENDING"));
+		dto.setPendingRequests(reqRepo.countByStatus(RequestStatus.PENDING));
 
 		dto.setTotalMatches(matchRepo.count());
 
 		dto.setTotalDeliveries(deliveryRepo.count());
 
-		dto.setCompletedDeliveries(deliveryRepo.countByStatus("COMPLETED"));
+		dto.setCompletedDeliveries(deliveryRepo.countByStatus(DeliveryStatus.COMPLETED));
 
 		return dto;
 	}

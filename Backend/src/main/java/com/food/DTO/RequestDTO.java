@@ -2,6 +2,8 @@ package com.food.DTO;
 
 import java.time.LocalDateTime;
 
+import com.food.entities.RequestStatus;
+
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,13 +21,13 @@ public class RequestDTO {
 	private String requestType;
 
 	  @NotBlank(message = "Status is required")
-	private String status;
+	private RequestStatus status;
 
 	   @NotBlank(message = "Meal preference is required")
 	private String mealPreference;
 
 	    @NotBlank(message = "Estimated meals is required")
-	private String estimatedMeals;
+	private Long estimatedMeals;
 	    
 	    @NotBlank(message = "Pickup address is required")
 	    @Size(max = 300)

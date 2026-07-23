@@ -2,6 +2,8 @@ package com.food.DTO;
 
 import java.time.LocalDateTime;
 
+import com.food.entities.RequestStatus;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +15,11 @@ public class RequestResponseDTO {
 
 	private String requestType;
 
-	private String status;
+	private RequestStatus status;
 
 	private String mealPreference;
 
-	private String estimatedMeals;
+	private Long estimatedMeals;
 
 	private String pickUpAddress;
 

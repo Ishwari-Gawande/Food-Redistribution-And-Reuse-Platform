@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,7 +43,8 @@ public class Request {
 
 	@NotBlank(message = "Status is required")
 	@Column(name = "status")
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private RequestStatus  status;
 
 	@NotBlank(message = "Meal preference is required")
 	@Column(name = "meal_preference")
@@ -50,7 +53,7 @@ public class Request {
 	@NotNull(message = "Estimated meals is required")
 	@Positive(message = "Estimated meals must be greater than 0")
 	@Column(name = "estimated_meals")
-	private String estimatedMeals;
+	private Long estimatedMeals;
 
 	@NotBlank(message = "Pickup address is required")
 	@Column(name = "pickup_address")

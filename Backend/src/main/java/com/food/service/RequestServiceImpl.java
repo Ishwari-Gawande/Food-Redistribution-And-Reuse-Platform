@@ -9,6 +9,7 @@ import com.food.DTO.RequestDTO;
 import com.food.DTO.RequestResponseDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.Request;
+import com.food.entities.RequestStatus;
 import com.food.entities.User;
 import com.food.repository.RequestRepository;
 import com.food.repository.UserRepository;
@@ -33,7 +34,7 @@ public class RequestServiceImpl implements RequestService {
 		Request request = new Request();
 
 		request.setRequestType(dto.getRequestType());
-		request.setStatus("Draft");
+		request.setStatus(RequestStatus.DRAFT);		
 		request.setMealPreference(dto.getMealPreference());
 		request.setEstimatedMeals(dto.getEstimatedMeals());
 		request.setPickUpAddress(dto.getPickUpAddress());
@@ -84,7 +85,7 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public List<Request> findByStatus(String status) {
+	public List<Request> findByStatus(RequestStatus status) {
 		return requestRepo.findByStatus(status);
 	}
 
@@ -97,15 +98,14 @@ public class RequestServiceImpl implements RequestService {
 	public Request submitRequest(Long id) {
 		Request request = requestRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!"));
-		request.setStatus("SUBMITTED");
-		return requestRepo.save(request);
+		request.setStatus(RequestStatus.SUBMITTED);		return requestRepo.save(request);
 	}
 
 	@Override
 	public Request cancelRequest(Long id) {
 		Request request = requestRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Request Not Found!"));
-		request.setStatus("CANCELLED");
+		request.setStatus(RequestStatus.CANCELLED);
 		return requestRepo.save(request);
 	}
 
