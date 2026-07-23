@@ -15,5 +15,7 @@ import jakarta.transaction.Transactional;
 public interface DelieveryRepository extends JpaRepository<Deliveries, Long> {
 	List<Deliveries> findByStatus(DeliveryStatus assigned);
 
-	Long countByStatus(DeliveryStatus status);
+
+	Long countByStatus(DeliveryStatus completed);
+
 }

@@ -23,4 +23,5 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 	Long countByUser_Id(Long userId);
 
 	Long countByUser_IdAndStatus(Long userId, RequestStatus status);
+
 }

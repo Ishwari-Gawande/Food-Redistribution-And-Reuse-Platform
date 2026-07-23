@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.food.DTO.UserDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.User;
+import com.food.entities.UserStatus;
 import com.food.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
 		user.setAccountType(request.getAccountType());
 		user.setAddress(request.getAddress());
 		user.setCity(request.getCity());
-		user.setStatus("ACTIVE");
+		user.setStatus(UserStatus.ACTIVE);
 
 		userRepo.save(user);
 

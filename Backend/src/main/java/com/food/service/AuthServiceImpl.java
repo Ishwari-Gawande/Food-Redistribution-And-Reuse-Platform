@@ -9,6 +9,7 @@ import com.food.DTO.RegisterDTO;
 import com.food.DTO.ResetPasswordDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.User;
+import com.food.entities.UserStatus;
 import com.food.repository.UserRepository;
 import com.food.security.JwtUtils;
 
@@ -39,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
 		user.setAddress(registerRequest.getAddress());
 		user.setCity(registerRequest.getCity());
 
-		user.setStatus("ACTIVE");
+		user.setStatus(UserStatus.ACTIVE);
 
 		userRepo.save(user);
 

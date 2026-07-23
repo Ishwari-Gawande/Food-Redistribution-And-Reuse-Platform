@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.food.entities.DeliveryStatus;
 import com.food.entities.User;
+import com.food.entities.UserStatus;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	boolean existsByEmail(String email);
 
-	long countByStatus(String status);
+	long countByStatus(UserStatus status);
 
 }

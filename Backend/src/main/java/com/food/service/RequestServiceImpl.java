@@ -34,7 +34,7 @@ public class RequestServiceImpl implements RequestService {
 		Request request = new Request();
 
 		request.setRequestType(dto.getRequestType());
-		request.setStatus(RequestStatus.PENDING);
+		request.setStatus(RequestStatus.DRAFT);
 		request.setMealPreference(dto.getMealPreference());
 		request.setEstimatedMeals(dto.getEstimatedMeals());
 		request.setPickUpAddress(dto.getPickUpAddress());

@@ -20,14 +20,14 @@ public class RequestDTO {
 	@NotBlank(message = "Request type is required")
 	private String requestType;
 
-	@NotBlank(message = "Status is required")
+	@NotNull(message = "Status is required")
 	private RequestStatus status;
 
 	@NotBlank(message = "Meal preference is required")
 	private String mealPreference;
 
 	@NotBlank(message = "Estimated meals is required")
-	private String estimatedMeals;
+	private Long estimatedMeals;
 
 	@NotBlank(message = "Pickup address is required")
 	@Size(max = 300)

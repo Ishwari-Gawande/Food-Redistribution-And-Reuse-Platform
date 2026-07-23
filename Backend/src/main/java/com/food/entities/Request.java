@@ -49,7 +49,7 @@ public class Request {
 	@NotNull(message = "Estimated meals is required")
 	@Positive(message = "Estimated meals must be greater than 0")
 	@Column(name = "estimated_meals")
-	private String estimatedMeals;
+	private Long estimatedMeals;
 
 	@NotBlank(message = "Pickup address is required")
 	@Column(name = "pickup_address")

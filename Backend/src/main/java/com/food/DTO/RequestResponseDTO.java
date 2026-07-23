@@ -19,7 +19,7 @@ public class RequestResponseDTO {
 
 	private String mealPreference;
 
-	private String estimatedMeals;
+	private Long estimatedMeals;
 
 	private String pickUpAddress;
 
