@@ -16,25 +16,32 @@ function Login() {
 
         try {
 
-            const response = await axios.post( 
+            const response = await axios.post(
                 "http://localhost:8080/food/api/auth/login",
                 {
                     email,
                     password
                 }
             );
-//here our response.data={       after backend respond
-// "id":5,
-// "name":"Ishwari",
-// "accountType":"DONOR"
-// }
 
-            localStorage.setItem("user", JSON.stringify(response.data));//stringify is doing object to string conversion
-            //because local storage store the data in string form not object
+            // Save JWT Token
+            localStorage.setItem("token", response.data.token);
+
+            // Save User Details
+            localStorage.setItem(
+                "user",
+                JSON.stringify({
+                    id: response.data.id,
+                    name: response.data.name,
+                    email: response.data.email,
+                    accountType: response.data.accountType
+                })
+            );
 
             const role = response.data.accountType;
 
             switch (role) {
+
                 case "ADMIN":
                     navigate("/admin");
                     break;
@@ -56,17 +63,24 @@ function Login() {
             }
 
         } catch (err) {
-              console.log(err);
 
-    if (err.response) {
-        console.log("Status:", err.response.status);
-        console.log("Data:", err.response.data);
-        alert(err.response.data.message || "Login failed");
-    } else if (err.request) {
-        alert("Cannot connect to the backend.");
-    } else {
-        alert(err.message);
-    }
+            console.log(err);
+
+            if (err.response) {
+
+                console.log("Status:", err.response.status);
+                console.log("Data:", err.response.data);
+
+                alert(err.response.data.message || "Login failed");
+
+            } else if (err.request) {
+
+                alert("Cannot connect to the backend.");
+
+            } else {
+
+                alert(err.message);
+            }
         }
     };
 
@@ -159,29 +173,39 @@ function Login() {
                                 Or continue with
                             </div>
 
-                          <div className="row g-3 mt-2">
+                            <div className="row g-3 mt-2">
 
-  <div className="col-6">
-    <button type="button" className="social-btn">
-      <img
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-        alt="google"
-      />
-      <span>Google</span>
-    </button>
-  </div>
+                                <div className="col-6">
 
-  <div className="col-6">
-    <button type="button" className="social-btn">
-      <img
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
-        alt="linkedin"
-      />
-      <span>LinkedIn</span>
-    </button>
-  </div>
+                                    <button type="button" className="social-btn">
 
-</div> 
+                                        <img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                                            alt="google"
+                                        />
+
+                                        <span>Google</span>
+
+                                    </button>
+
+                                </div>
+
+                                <div className="col-6">
+
+                                    <button type="button" className="social-btn">
+
+                                        <img
+                                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+                                            alt="linkedin"
+                                        />
+
+                                        <span>LinkedIn</span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -199,7 +223,8 @@ function Login() {
 
                     {/* RIGHT */}
 
-<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center image-section">
+                    <div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center image-section">
+
                         <div className="image-wrapper">
 
                             <img
@@ -211,7 +236,7 @@ function Login() {
 
                                 <small>IMPACT METRIC</small>
 
-                               <h3>2.4M Tons</h3>
+                                <h3>2.4M Tons</h3>
 
                                 <p>
                                     of waste diverted from landfills collectively by our community.
