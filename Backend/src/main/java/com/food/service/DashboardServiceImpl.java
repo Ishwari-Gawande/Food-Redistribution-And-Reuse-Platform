@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.food.DTO.AdminDashboardDTO;
 import com.food.DTO.DonorDashboardDTO;
+import com.food.entities.DeliveryStatus;
 import com.food.repository.DelieveryRepository;
 import com.food.repository.MatchesRepository;
 import com.food.repository.RequestRepository;
@@ -39,7 +40,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 		dto.setTotalDeliveries(deliveryRepo.count());
 
-		dto.setCompletedDeliveries(deliveryRepo.countByStatus("COMPLETED"));
+		dto.setCompletedDeliveries(deliveryRepo.countByStatus(DeliveryStatus.COMPLETED));
 
 		return dto;
 	}

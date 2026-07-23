@@ -25,79 +25,73 @@ import com.food.repository.MatchesRepository;
 import com.food.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
+
 @Service
 @Transactional
-public class DeliveryServiceImpl implements DeliveryService{
+public class DeliveryServiceImpl implements DeliveryService {
 	@Autowired
 	private MatchesRepository matchRepo;
 	@Autowired
 	private UserRepository userRepo;
 	@Autowired
 	private DelieveryRepository deliveryRepo;
-	
-@Override
+
+	@Override
 	public String createDelivery(DeliveryDTO request) {
-	  Matches match = matchRepo.findById(request.getMatchId())
-	            .orElseThrow(() ->
-	                new ResourceNotFoundException("Match not found"));
+		Matches match = matchRepo.findById(request.getMatchId())
+				.orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-	    User partner = userRepo.findById(request.getDeliveryPartnerId())
-	            .orElseThrow(() ->
-	                new ResourceNotFoundException("Delivery Partner not found"));
+		User partner = userRepo.findById(request.getDeliveryPartnerId())
+				.orElseThrow(() -> new ResourceNotFoundException("Delivery Partner not found"));
 
-	    Deliveries delivery = new Deliveries();
+		Deliveries delivery = new Deliveries();
 
-	    delivery.setMatch(match);
-	    delivery.setDeliveryPartner(partner);
-	    delivery.setStatus(DeliveryStatus.ASSIGNED);	    deliveryRepo.save(delivery);
+		delivery.setMatch(match);
+		delivery.setDeliveryPartner(partner);
+		delivery.setStatus(DeliveryStatus.ASSIGNED);
+		deliveryRepo.save(delivery);
 
-	    return "Delivery Created Successfully";
-	
+		return "Delivery Created Successfully";
+
 	}
 
-@Override
-public Deliveries findById(Long id) {
-	 return deliveryRepo.findById(id)
-	            .orElseThrow(() ->
-	                new ResourceNotFoundException("Delivery not found"));
-}
+	@Override
+	public Deliveries findById(Long id) {
+		return deliveryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Delivery not found"));
+	}
 
-@Override
-public List<Deliveries> findAssignedDeliveries() {
-	return deliveryRepo.findByStatus(DeliveryStatus.ASSIGNED);
-}
+	@Override
+	public List<Deliveries> findAssignedDeliveries() {
+		return deliveryRepo.findByStatus(DeliveryStatus.ASSIGNED);
+	}
 
-@Override
-public String startDelivery(Long id) {
-	Deliveries delivery = deliveryRepo.findById(id)
-            .orElseThrow(() ->
-                new ResourceNotFoundException("Delivery not found"));
+	@Override
+	public String startDelivery(Long id) {
+		Deliveries delivery = deliveryRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Delivery not found"));
 
-    delivery.setStatus(DeliveryStatus.IN_PROGRESS);
+		delivery.setStatus(DeliveryStatus.IN_PROGRESS);
 
-    deliveryRepo.save(delivery);
+		deliveryRepo.save(delivery);
 
-    return "Delivery Started";
-}
+		return "Delivery Started";
+	}
 
-@Override
-public String completeDelivery(Long id) {
-	  Deliveries delivery = deliveryRepo.findById(id)
-	            .orElseThrow(() ->
-	                new ResourceNotFoundException("Delivery not found"));
+	@Override
+	public String completeDelivery(Long id) {
+		Deliveries delivery = deliveryRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Delivery not found"));
 
-	  delivery.setStatus(DeliveryStatus.COMPLETED);
+		delivery.setStatus(DeliveryStatus.COMPLETED);
 
-	    deliveryRepo.save(delivery);
+		deliveryRepo.save(delivery);
 
-	    return "Delivery Completed Successfully";
-}
+		return "Delivery Completed Successfully";
+	}
 
-@Override
-public Deliveries trackDelivery(Long id) {
-	  return deliveryRepo.findById(id)
-	            .orElseThrow(() ->
-	                new ResourceNotFoundException("Delivery not found"));
-}
+	@Override
+	public Deliveries trackDelivery(Long id) {
+		return deliveryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Delivery not found"));
+	}
 
 }

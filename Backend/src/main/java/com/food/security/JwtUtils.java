@@ -11,13 +11,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
 //3
 @Service
 public class JwtUtils {
-    @Value("${jwt.secret}")
-	private String secret; //This is secret key use to sign or verify token
-    
-    @Value("${jwt.expiration}")
+	@Value("${jwt.secret}")
+	private String secret; // This is secret key use to sign or verify token
+
+	@Value("${jwt.expiration}")
 	private long expiration;
 
 	// jwt can't directly use string it need key object

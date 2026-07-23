@@ -16,8 +16,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @OpenAPIDefinition(info = @Info(title = "Food API", version = "v1.0"), security = {
 
-		@SecurityRequirement(name = "basicAuth") ,
-		@SecurityRequirement(name = "bearerAuth")})
+		@SecurityRequirement(name = "basicAuth"), @SecurityRequirement(name = "bearerAuth") })
 @Configuration
 public class SwaggerConfig {
 }
