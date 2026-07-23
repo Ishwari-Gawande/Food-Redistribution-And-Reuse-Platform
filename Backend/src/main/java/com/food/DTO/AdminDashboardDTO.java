@@ -6,11 +6,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdminDashboardDTO {
-	   private long totalUsers;
+	private Long totalUsers;
 
-	    private long totalRequests;
+	private Long pendingUsers;
 
-	    private long completedDeliveries;
+	private Long totalRequests;
 
-	    private long activeMatches;
+	private Long pendingRequests;
+
+	private Long totalDeliveries;
+
+	private Long completedDeliveries;
+
+	private Long totalMatches;
 }

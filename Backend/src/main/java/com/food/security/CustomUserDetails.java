@@ -13,14 +13,15 @@ import com.food.entities.User;
 //Spring Security does not understand User entity directly
 //so that we have create this customUserDetails
 public class CustomUserDetails implements UserDetails {
-private final User user;
-	
+	private final User user;
+
 	public CustomUserDetails(User user) {
-		this.user=user;
+		this.user = user;
 	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getAccountType()));
+		return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getAccountType()));
 	}
 
 	@Override
@@ -50,8 +51,7 @@ private final User user;
 
 	@Override
 	public boolean isEnabled() {
-return true;
+		return true;
 	}
 
-	
 }

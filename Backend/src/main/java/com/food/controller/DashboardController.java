@@ -16,8 +16,11 @@ public class DashboardController {
 
 	private final DashboardService dashboardService;
 
+	//Admin dashboard
 	@GetMapping("/admin")
 	public ResponseEntity<?> getAdminDashboard() {
+		System.out.println("Admin Dashboard API is Called!");
 		return ResponseEntity.ok(dashboardService.getAdminDashboard());
 	}
+
 }

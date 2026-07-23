@@ -16,4 +16,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 	public List<Request> findByStatus(String status);
 
 	public List<Request> findByUserId(Long userId);
+	
+	Long countByStatus(String status);
 }
