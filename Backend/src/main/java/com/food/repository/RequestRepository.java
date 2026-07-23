@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.food.entities.Request;
+import com.food.entities.RequestStatus;
 
 import jakarta.transaction.Transactional;
 
@@ -13,9 +14,13 @@ import jakarta.transaction.Transactional;
 @Transactional
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-	public List<Request> findByStatus(String status);
+	public List<Request> findByStatus(RequestStatus status);
 
 	public List<Request> findByUserId(Long userId);
-	
-	Long countByStatus(String status);
+
+	Long countByStatus(RequestStatus status);
+
+	Long countByUser_Id(Long userId);
+
+	Long countByUser_IdAndStatus(Long userId, RequestStatus status);
 }

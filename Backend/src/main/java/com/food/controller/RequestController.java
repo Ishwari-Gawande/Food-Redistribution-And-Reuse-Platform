@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.food.DTO.RequestDTO;
 import com.food.DTO.RequestResponseDTO;
+import com.food.entities.RequestStatus;
 import com.food.service.RequestService;
 
 import jakarta.validation.Valid;
@@ -58,7 +59,7 @@ public class RequestController {
 	// find by status
 	@GetMapping("/active")
 	public ResponseEntity<?> findActiveRequest() {
-		return ResponseEntity.ok(requestService.findByStatus("ACTIVE"));
+		return ResponseEntity.ok(requestService.findByStatus(RequestStatus.ACTIVE));
 	}
 
 	// find my request

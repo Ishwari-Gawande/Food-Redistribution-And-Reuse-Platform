@@ -1,21 +1,19 @@
 package com.food.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -39,9 +37,10 @@ public class Request {
 	@Column(name = "request_type")
 	private String requestType;
 
-	@NotBlank(message = "Status is required")
+	@NotNull(message = "Status is required")
 	@Column(name = "status")
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private RequestStatus status;
 
 	@NotBlank(message = "Meal preference is required")
 	@Column(name = "meal_preference")
@@ -60,7 +59,7 @@ public class Request {
 	private boolean deliveryAvailable;
 
 	@NotNull(message = "Needed by date is required")
-	//@Future(message = "Needed by date must be in the future")
+	// @Future(message = "Needed by date must be in the future")
 	@Column(name = "needed_by")
 	private LocalDateTime neededBy;
 

@@ -44,11 +44,11 @@ public class User {
 	private Media profileMediaId;
 
 	@Column(length = 100, nullable = false)
-	@NotBlank(message="Name is required")
+	@NotBlank(message = "Name is required")
 	private String name;
 
-	@NotBlank(message="email is required")
-    @Email(message="Enter a valid email")
+	@NotBlank(message = "email is required")
+	@Email(message = "Enter a valid email")
 	@Column(length = 255, unique = true, nullable = false)
 	private String email;
 
@@ -94,6 +94,5 @@ public class User {
 	@UpdateTimestamp
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
-
 
 }

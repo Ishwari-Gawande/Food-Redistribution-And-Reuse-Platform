@@ -5,6 +5,7 @@ import java.util.List;
 import com.food.DTO.RequestDTO;
 import com.food.DTO.RequestResponseDTO;
 import com.food.entities.Request;
+import com.food.entities.RequestStatus;
 
 public interface RequestService {
 
@@ -16,7 +17,7 @@ public interface RequestService {
 
 	public String deleteById(Long id);
 
-	public List<Request> findByStatus(String status);
+	public List<Request> findByStatus(RequestStatus status);
 
 	public List<Request> findMyRequest(Long userId);
 

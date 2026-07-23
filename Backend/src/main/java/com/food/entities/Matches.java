@@ -31,19 +31,19 @@ public class Matches {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	 @NotNull(message = "Donation request is required")
+	@NotNull(message = "Donation request is required")
 	@ManyToOne
 	@JoinColumn(name = "donation_request_id")
 	private Request donationRequest;
 
-	 @NotNull(message = "Receiver request is required")
+	@NotNull(message = "Receiver request is required")
 	@ManyToOne
 	@JoinColumn(name = "receiver_request_id")
 	private Request receiverRequest;
 
-	    @NotBlank(message = "Match status is required")
+	@NotBlank(message = "Match status is required")
 	@Column(name = "match_status")
-	    @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private MatchStatus matchStatus;
 
 	@Column(name = "matched_at")
@@ -54,7 +54,7 @@ public class Matches {
 	@JoinColumn(name = "matched_by")
 	private User matchedBy;
 
-    @NotNull(message = "Delivery partner is required")
+	@NotNull(message = "Delivery partner is required")
 	@ManyToOne
 	@JoinColumn(name = "delivery_partner_id")
 	private User deliveryPartner;

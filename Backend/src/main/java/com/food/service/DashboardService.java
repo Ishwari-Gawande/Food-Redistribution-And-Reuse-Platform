@@ -8,5 +8,5 @@ public interface DashboardService {
 	public AdminDashboardDTO getAdminDashboard();
 	
 	// Donor dashboard
-	public DonorDashboardDTO getDonorDashboard();
+	public DonorDashboardDTO getDonorDashboard(Long userId);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.food.DTO.AdminDashboardDTO;
 import com.food.DTO.DonorDashboardDTO;
 import com.food.entities.DeliveryStatus;
+import com.food.entities.RequestStatus;
 import com.food.repository.DelieveryRepository;
 import com.food.repository.MatchesRepository;
 import com.food.repository.RequestRepository;
@@ -34,7 +35,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 		dto.setTotalRequests(reqRepo.count());
 
-		dto.setPendingRequests(reqRepo.countByStatus("PENDING"));
+		dto.setPendingRequests(reqRepo.countByStatus(RequestStatus.PENDING));
 
 		dto.setTotalMatches(matchRepo.count());
 
@@ -46,11 +47,19 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 
 	@Override
-	public DonorDashboardDTO getDonorDashboard() {
+	public DonorDashboardDTO getDonorDashboard(Long userId) {
 
 		DonorDashboardDTO dto = new DonorDashboardDTO();
 
-		return null;
+		dto.setActiveRequests(reqRepo.countByUser_IdAndStatus(userId, RequestStatus.ACTIVE));
+
+		dto.setCancelledRequests(reqRepo.countByUser_IdAndStatus(userId, RequestStatus.CANCELLED));
+
+		dto.setCompletedRequests(reqRepo.countByUser_IdAndStatus(userId, RequestStatus.COMPLETED));
+
+		dto.setTotalRequests(reqRepo.countByUser_Id(userId));
+
+		return dto;
 	}
 
 }
