@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,7 +32,8 @@ public class DeliveryOutcomes {
 
 	@NotBlank(message = "Outcome is required")
 	@Column(name = "outcome", nullable = false)
-	private String outcome;
+	@Enumerated(EnumType.STRING)
+	private Outcome outcome;
 
 	@NotBlank(message = "Remark is required")
 	@Column(name = "remark", nullable = false)

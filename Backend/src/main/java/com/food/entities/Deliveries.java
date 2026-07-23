@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,9 +35,10 @@ public class Deliveries {
 	@Column(name = "delivery_mode")
 	private String deliveryMode;
 
-	  @NotBlank(message = "Delivery status is required")
+	@NotNull(message = "Delivery status is required")
+	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private String status;
+	private DeliveryStatus status;
 
 	 @NotNull(message = "Pickup time is required")
 	@Column(name = "pickup_time")

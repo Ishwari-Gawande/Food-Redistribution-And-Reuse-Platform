@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import com.food.DTO.DeliveryDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.Deliveries;
+import com.food.entities.DeliveryStatus;
 import com.food.entities.Matches;
+import com.food.entities.Status;
 import com.food.entities.User;
 import com.food.repository.DelieveryRepository;
 import com.food.repository.MatchesRepository;
@@ -47,9 +49,7 @@ public class DeliveryServiceImpl implements DeliveryService{
 
 	    delivery.setMatch(match);
 	    delivery.setDeliveryPartner(partner);
-	    delivery.setStatus("ASSIGNED");
-
-	    deliveryRepo.save(delivery);
+	    delivery.setStatus(DeliveryStatus.ASSIGNED);	    deliveryRepo.save(delivery);
 
 	    return "Delivery Created Successfully";
 	
@@ -64,7 +64,7 @@ public Deliveries findById(Long id) {
 
 @Override
 public List<Deliveries> findAssignedDeliveries() {
-	return deliveryRepo.findByStatus("ASSIGNED");
+	return deliveryRepo.findByStatus(DeliveryStatus.ASSIGNED);
 }
 
 @Override
@@ -73,7 +73,7 @@ public String startDelivery(Long id) {
             .orElseThrow(() ->
                 new ResourceNotFoundException("Delivery not found"));
 
-    delivery.setStatus("IN_PROGRESS");
+    delivery.setStatus(DeliveryStatus.IN_PROGRESS);
 
     deliveryRepo.save(delivery);
 
@@ -86,7 +86,7 @@ public String completeDelivery(Long id) {
 	            .orElseThrow(() ->
 	                new ResourceNotFoundException("Delivery not found"));
 
-	    delivery.setStatus("COMPLETED");
+	  delivery.setStatus(DeliveryStatus.COMPLETED);
 
 	    deliveryRepo.save(delivery);
 

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,7 +43,8 @@ public class Matches {
 
 	    @NotBlank(message = "Match status is required")
 	@Column(name = "match_status")
-	private String matchStatus;
+	    @Enumerated(EnumType.STRING)
+	private MatchStatus matchStatus;
 
 	@Column(name = "matched_at")
 	private LocalDateTime matchedAt;

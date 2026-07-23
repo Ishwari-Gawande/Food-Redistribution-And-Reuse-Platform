@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.food.DTO.AssignDeliveryDTO;
 import com.food.DTO.MatchDTO;
 import com.food.Exception.ResourceNotFoundException;
+import com.food.entities.MatchStatus;
 import com.food.entities.Matches;
 import com.food.entities.Request;
+import com.food.entities.Status;
 import com.food.entities.User;
 import com.food.repository.MatchesRepository;
 import com.food.repository.RequestRepository;
@@ -44,7 +46,7 @@ public class MatchServiceImpl implements MatchService {
 		match.setDonationRequest(donationRequest);
 		match.setReceiverRequest(receiverRequest);
 		match.setMatchedBy(admin);
-		match.setMatchStatus("PENDING");
+		match.setMatchStatus(MatchStatus.PENDING);
 		match.setMatchedAt(LocalDateTime.now());
 
 		matchRepo.save(match);
@@ -65,7 +67,7 @@ public class MatchServiceImpl implements MatchService {
 
 	@Override
 	public List<Matches> findPendingMatches() {
-		return matchRepo.findByMatchStatus("PENDING");
+		return matchRepo.findByMatchStatus(MatchStatus.PENDING);
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class MatchServiceImpl implements MatchService {
 
 		Matches match = matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-		match.setMatchStatus("APPROVED");
+		match.setMatchStatus(MatchStatus.APPROVED);
 
 		matchRepo.save(match);
 
@@ -84,7 +86,7 @@ public class MatchServiceImpl implements MatchService {
 	public String rejectMatch(Long id) {
 		Matches match = matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-		match.setMatchStatus("REJECTED");
+		match.setMatchStatus(MatchStatus.REJECTED);
 
 		matchRepo.save(match);
 
@@ -100,7 +102,7 @@ public class MatchServiceImpl implements MatchService {
 
 		match.setDeliveryPartner(deliveryPartner);
 
-		match.setMatchStatus("ASSIGNED");
+		match.setMatchStatus(MatchStatus.ASSIGNED);
 
 		matchRepo.save(match);
 

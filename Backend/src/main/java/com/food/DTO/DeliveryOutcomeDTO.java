@@ -1,5 +1,7 @@
 package com.food.DTO;
 
+import com.food.entities.Outcome;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,7 +15,7 @@ public class DeliveryOutcomeDTO {
 	 private Long deliveryId;
 	  
 	  @NotBlank(message = "Outcome is required")
-	    private String outcome;
+	    private Outcome outcome;
 
 	   @Size(max = 500, message = "Remarks cannot exceed 500 characters")
 	    private String remarks;
