@@ -10,7 +10,7 @@ import com.food.DTO.ResetPasswordDTO;
 import com.food.Exception.ResourceNotFoundException;
 import com.food.entities.User;
 import com.food.repository.UserRepository;
-import com.food.secuirity.JWTService;
+import com.food.security.JwtUtils;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class AuthServiceImpl implements AuthService {
 
 	private final UserRepository userRepo;
 
-	private final JWTService jwtService;
+	private final JwtUtils jwtService;
 	@Override
 	public String register(RegisterDTO registerRequest) {
 

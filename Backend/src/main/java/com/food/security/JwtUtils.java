@@ -1,4 +1,4 @@
-package com.food.secuirity;
+package com.food.security;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -11,11 +11,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-
+//3
 @Service
-public class JWTService {
+public class JwtUtils {
     @Value("${jwt.secret}")
 	private String secret; //This is secret key use to sign or verify token
+    
     @Value("${jwt.expiration}")
 	private long expiration;
 

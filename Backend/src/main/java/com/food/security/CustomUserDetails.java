@@ -1,4 +1,4 @@
-package com.food.secuirity;
+package com.food.security;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.food.entities.User;
-
+//1.
 //Spring Security does not understand User entity directly
 //so that we have create this customUserDetails
 public class CustomUserDetails implements UserDetails {

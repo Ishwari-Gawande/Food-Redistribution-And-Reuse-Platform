@@ -1,4 +1,4 @@
-package com.food.secuirity;
+package com.food.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,7 +9,7 @@ import com.food.entities.User;
 import com.food.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-
+//2
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
