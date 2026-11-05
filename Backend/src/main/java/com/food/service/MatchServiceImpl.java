@@ -42,53 +42,134 @@ public class MatchServiceImpl implements MatchService {
 	@Autowired
 	private NotificationService notificationService;
 
-	@Override
-	public String createMatch(MatchDTO request) {
-		Request donationRequest = requestRepo.findById(request.getDonationRequestId())
-				.orElseThrow(() -> new ResourceNotFoundException("Donation Request not found"));
+//	@Override
+//	public String createMatch(MatchDTO request) {
+//		Request donationRequest = requestRepo.findById(request.getDonationRequestId())
+//				.orElseThrow(() -> new ResourceNotFoundException("Donation Request not found"));
+//
+//		Request receiverRequest = requestRepo.findById(request.getReceiverRequestId())
+//				.orElseThrow(() -> new ResourceNotFoundException("Receiver Request not found"));
+//
+//		User matchedBy = userRepo.findById(request.getMatchedBy())
+//		        .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+//
+//		Matches match = new Matches();
+//
+//		match.setDonationRequest(donationRequest);
+//		match.setReceiverRequest(receiverRequest);
+//		match.setMatchedBy(matchedBy);
+//		match.setMatchStatus(MatchStatus.PENDING);
+//		match.setMatchedAt(LocalDateTime.now());
+//
+//		matchRepo.save(match);
+//
+//		// BUGFIX: previously neither request's status was ever updated, so a
+//		// donation would stay "ACTIVE" forever (never showing as MATCHED to
+//		// the donor) and would keep appearing in the receiver's "Browse Food"
+//		// list even after being claimed.
+//		donationRequest.setStatus(RequestStatus.MATCHED);
+//		receiverRequest.setStatus(RequestStatus.MATCHED);
+//		requestRepo.save(donationRequest);
+//		requestRepo.save(receiverRequest);
+//
+//		// Notify the donor that someone wants their food, and notify the
+//		// receiver that their request was submitted successfully.
+//		safeNotify(donationRequest.getUser().getId(),
+//				"Your donation was requested",
+//				receiverRequest.getUser().getName() + " has requested your donation (\""
+//						+ donationRequest.getMealPreference() + "\"). It is now pending approval.",
+//				"MATCH");
+//
+//		safeNotify(receiverRequest.getUser().getId(),
+//				"Food request sent",
+//				"Your request for \"" + donationRequest.getMealPreference()
+//						+ "\" has been matched with a donor and is pending approval.",
+//				"MATCH");
+//
+//		return "Match Created Successfully";
+//	}
 
-		Request receiverRequest = requestRepo.findById(request.getReceiverRequestId())
-				.orElseThrow(() -> new ResourceNotFoundException("Receiver Request not found"));
 
-		User matchedBy = userRepo.findById(request.getMatchedBy())
-		        .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+@Override
+public String createMatch(MatchDTO request) {
 
-		Matches match = new Matches();
+    Request donationRequest = requestRepo.findById(
+        request.getDonationRequestId()
+    ).orElseThrow(() ->
+        new ResourceNotFoundException("Donation Request not found")
+    );
 
-		match.setDonationRequest(donationRequest);
-		match.setReceiverRequest(receiverRequest);
-		match.setMatchedBy(matchedBy);
-		match.setMatchStatus(MatchStatus.PENDING);
-		match.setMatchedAt(LocalDateTime.now());
+    Request receiverRequest = requestRepo.findById(
+        request.getReceiverRequestId()
+    ).orElseThrow(() ->
+        new ResourceNotFoundException("Receiver Request not found")
+    );
 
-		matchRepo.save(match);
+    User matchedBy = userRepo.findById(request.getMatchedBy())
+        .orElseThrow(() ->
+            new ResourceNotFoundException("User not found")
+        );
 
-		// BUGFIX: previously neither request's status was ever updated, so a
-		// donation would stay "ACTIVE" forever (never showing as MATCHED to
-		// the donor) and would keep appearing in the receiver's "Browse Food"
-		// list even after being claimed.
-		donationRequest.setStatus(RequestStatus.MATCHED);
-		receiverRequest.setStatus(RequestStatus.MATCHED);
-		requestRepo.save(donationRequest);
-		requestRepo.save(receiverRequest);
+    if (donationRequest.getRequestType() != RequestType.DONATION) {
+        throw new IllegalArgumentException(
+            "First request must be a DONATION request"
+        );
+    }
 
-		// Notify the donor that someone wants their food, and notify the
-		// receiver that their request was submitted successfully.
-		safeNotify(donationRequest.getUser().getId(),
-				"Your donation was requested",
-				receiverRequest.getUser().getName() + " has requested your donation (\""
-						+ donationRequest.getMealPreference() + "\"). It is now pending approval.",
-				"MATCH");
+    if (receiverRequest.getRequestType() != RequestType.RECEIVER) {
+        throw new IllegalArgumentException(
+            "Second request must be a RECEIVER request"
+        );
+    }
 
-		safeNotify(receiverRequest.getUser().getId(),
-				"Food request sent",
-				"Your request for \"" + donationRequest.getMealPreference()
-						+ "\" has been matched with a donor and is pending approval.",
-				"MATCH");
+    if (donationRequest.getStatus() != RequestStatus.ACTIVE ||
+        receiverRequest.getStatus() != RequestStatus.ACTIVE) {
+        throw new IllegalStateException(
+            "Both requests must be ACTIVE before matching"
+        );
+    }
 
-		return "Match Created Successfully";
-	}
+    if (donationRequest.getUser().getId()
+            .equals(receiverRequest.getUser().getId())) {
+        throw new IllegalArgumentException(
+            "A user cannot match their own donation"
+        );
+    }
 
+    Matches match = new Matches();
+    match.setDonationRequest(donationRequest);
+    match.setReceiverRequest(receiverRequest);
+    match.setMatchedBy(matchedBy);
+    match.setMatchStatus(MatchStatus.PENDING);
+    match.setMatchedAt(LocalDateTime.now());
+
+    matchRepo.save(match);
+
+    donationRequest.setStatus(RequestStatus.MATCHED);
+    receiverRequest.setStatus(RequestStatus.MATCHED);
+
+    requestRepo.save(donationRequest);
+    requestRepo.save(receiverRequest);
+
+    safeNotify(
+        donationRequest.getUser().getId(),
+        "Your donation was requested",
+        receiverRequest.getUser().getName()
+            + " has requested your donation. It is pending approval.",
+        "MATCH"
+    );
+
+    safeNotify(
+        receiverRequest.getUser().getId(),
+        "Food request sent",
+        "Your food request has been matched and is pending approval.",
+        "MATCH"
+    );
+
+    return "Match Created Successfully";
+}
+
+	
 	@Override
 	public MatchResponseDTO findById(Long id) {
 		Matches match = matchRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Match not found"));
