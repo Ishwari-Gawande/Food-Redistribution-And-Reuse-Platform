@@ -1,5 +1,6 @@
 
 import { Routes, Route } from "react-router-dom";
+
 import LandingPage from "./Pages/Landing/LandingPage";
 import Login from "./Component/Login";
 import AdminDashboard from "./Pages/admin/AdminDashboard";
@@ -10,16 +11,20 @@ import AdminDonationsPage from "./Pages/admin/AdminDonationsPage";
 import AdminDeliveriesPage from "./Pages/admin/AdminDeliveriesPage";
 import AdminReportsPage from "./Pages/admin/AdminReportsPage";
 import DonationMap from "./Pages/admin/DonationMap";
+
 import DonorDashboard from "./Pages/donor/DonorDashboard";
 import ReceiverDashboard from "./Pages/ReceiverDashboard";
 import VolunteerDashboard from "./Pages/VolunteerDashboard";
+
 import ForgotPassword from "./Pages/ForgotPassword";
 import Register from "./Component/Register";
+
 import CreateDonation from "./Pages/donor/CreateDonation";
 import DonationSubmitted from "./Pages/donor/DonationSubmitted";
 import DonationHistory from "./Pages/donor/DonationHistory";
 import DonationDetails from "./Pages/donor/DonationDetails";
 import ImpactDashboard from "./Pages/donor/ImpactDashboard";
+
 import Payment from "./Pages/Industry/Payment";
 import IndustryDashboard from "./Pages/Industry/IndustryDashboard";
 import RequestDetails from "./Pages/Industry/RequestDetails";
@@ -28,15 +33,20 @@ import IndustryChangePassword from "./Pages/Industry/ChangePassword";
 import IndustryNotifications from "./Pages/Industry/Notifications";
 import IndustryRequestHistory from "./Pages/Industry/RequestHistory";
 
-// Chatbot import
+// Chatbot import - Correct folder and file name
 import Chatbot from "./Component/Chatbot/Chatbot";
+
 
 function App() {
   return (
     <>
       <Routes>
+
+        {/* Landing and Authentication */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminDashboard />} />
@@ -49,21 +59,17 @@ function App() {
         <Route path="/admin/reports" element={<AdminReportsPage />} />
         <Route path="/admin/map" element={<DonationMap />} />
 
-        {/* User Dashboard Routes */}
-        <Route path="/donor" element={<DonorDashboard />} />
-        <Route path="/receiver" element={<ReceiverDashboard />} />
-        <Route path="/volunteer" element={<VolunteerDashboard />} />
-
-        {/* Authentication Routes */}
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/register" element={<Register />} />
-
         {/* Donor Routes */}
+        <Route path="/donor" element={<DonorDashboard />} />
         <Route path="/donor/create-donation" element={<CreateDonation />} />
         <Route path="/donor/donation-submitted" element={<DonationSubmitted />} />
         <Route path="/donor/history" element={<DonationHistory />} />
         <Route path="/donor/donation-details/:id" element={<DonationDetails />} />
         <Route path="/donor/impact" element={<ImpactDashboard />} />
+
+        {/* Receiver and Volunteer Routes */}
+        <Route path="/receiver" element={<ReceiverDashboard />} />
+        <Route path="/volunteer" element={<VolunteerDashboard />} />
 
         {/* Industry Routes */}
         <Route path="/Payment" element={<Payment />} />
@@ -74,10 +80,12 @@ function App() {
         <Route path="/industry/notifications" element={<IndustryNotifications />} />
         <Route path="/industry/profile" element={<IndustryProfile />} />
         <Route path="/industry/change-password" element={<IndustryChangePassword />} />
+
       </Routes>
 
       {/* Beyond Ways Chatbot - Available on all pages */}
       <Chatbot />
+
     </>
   );
 }
