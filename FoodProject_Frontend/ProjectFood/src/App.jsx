@@ -1,3 +1,4 @@
+
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./Pages/Landing/LandingPage";
 import Login from "./Component/Login";
@@ -27,56 +28,57 @@ import IndustryChangePassword from "./Pages/Industry/ChangePassword";
 import IndustryNotifications from "./Pages/Industry/Notifications";
 import IndustryRequestHistory from "./Pages/Industry/RequestHistory";
 
+// Chatbot import
+import Chatbot from "./Component/Chatbot/Chatbot";
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/admin" element={<AdminDashboard />} />
-      <Route
-        path="/admin/users"
-        element={<Users />}
-      />
-      <Route
-        path="/admin/pending-users"
-        element={<PendingUsers />}
-      />
-      <Route path="/admin/pending-requests" element={<AdminDashboard />} />
-      <Route path="/admin/matching-queue" element={<AdminMatchingQueuePage />} />
-      <Route path="/admin/donations" element={<AdminDonationsPage />} />
-      <Route path="/admin/deliveries" element={<AdminDeliveriesPage />} />
-      <Route path="/admin/reports" element={<AdminReportsPage />} />
-      <Route
-        path="/admin/map"
-        element={<DonationMap />}
-      />
+    <>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
 
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/pending-users" element={<PendingUsers />} />
+        <Route path="/admin/pending-requests" element={<AdminDashboard />} />
+        <Route path="/admin/matching-queue" element={<AdminMatchingQueuePage />} />
+        <Route path="/admin/donations" element={<AdminDonationsPage />} />
+        <Route path="/admin/deliveries" element={<AdminDeliveriesPage />} />
+        <Route path="/admin/reports" element={<AdminReportsPage />} />
+        <Route path="/admin/map" element={<DonationMap />} />
 
-      <Route path="/donor" element={<DonorDashboard />} />
-      <Route path="/receiver" element={<ReceiverDashboard />} />
-      <Route path="/volunteer" element={<VolunteerDashboard />} />
+        {/* User Dashboard Routes */}
+        <Route path="/donor" element={<DonorDashboard />} />
+        <Route path="/receiver" element={<ReceiverDashboard />} />
+        <Route path="/volunteer" element={<VolunteerDashboard />} />
 
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/register" element={<Register />} />
+        {/* Authentication Routes */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/register" element={<Register />} />
 
-      <Route path="/donor/create-donation" element={<CreateDonation />} />
-      <Route path="/donor/donation-submitted" element={<DonationSubmitted />} />
-      <Route path="/donor/history" element={<DonationHistory />} />
-      <Route path="/donor/donation-details/:id" element={<DonationDetails />} />
-      {/* BUGFIX: DonorDashboard/Sidebar linked to "/donor/impact" but no
-          route existed for it, and ImpactDashboard.jsx had no export -
-          both are now fixed so the Impact page actually loads. */}
-      <Route path="/donor/impact" element={<ImpactDashboard />} />
+        {/* Donor Routes */}
+        <Route path="/donor/create-donation" element={<CreateDonation />} />
+        <Route path="/donor/donation-submitted" element={<DonationSubmitted />} />
+        <Route path="/donor/history" element={<DonationHistory />} />
+        <Route path="/donor/donation-details/:id" element={<DonationDetails />} />
+        <Route path="/donor/impact" element={<ImpactDashboard />} />
 
-      <Route path="/Payment" element={<Payment />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/industry" element={<IndustryDashboard />} />
-      <Route path="/industry/request/:id" element={<RequestDetails />} />
-      <Route path="/industry/history" element={<IndustryRequestHistory />} />
-      <Route path="/industry/notifications" element={<IndustryNotifications />} />
-      <Route path="/industry/profile" element={<IndustryProfile />} />
-      <Route path="/industry/change-password" element={<IndustryChangePassword />} />
-    </Routes>
+        {/* Industry Routes */}
+        <Route path="/Payment" element={<Payment />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/industry" element={<IndustryDashboard />} />
+        <Route path="/industry/request/:id" element={<RequestDetails />} />
+        <Route path="/industry/history" element={<IndustryRequestHistory />} />
+        <Route path="/industry/notifications" element={<IndustryNotifications />} />
+        <Route path="/industry/profile" element={<IndustryProfile />} />
+        <Route path="/industry/change-password" element={<IndustryChangePassword />} />
+      </Routes>
+
+      {/* Beyond Ways Chatbot - Available on all pages */}
+      <Chatbot />
+    </>
   );
 }
 
