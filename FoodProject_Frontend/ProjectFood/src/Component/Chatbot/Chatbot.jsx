@@ -91,7 +91,7 @@ function Chatbot() {
           {/* Header */}
           <div className="chatbot-header">
             <div>
-              <h3>Beyond Ways Assistant</h3>
+              <h3>Beyond Waste Assistant</h3>
               <span>● Online</span>
             </div>
 
@@ -131,7 +131,7 @@ function Chatbot() {
           <div className="chatbot-quick-questions">
             <button
               onClick={() =>
-                handleQuickQuestion("What is Beyond Ways?")
+                handleQuickQuestion("What is Beyond Waste?")
               }
             >
               About us
