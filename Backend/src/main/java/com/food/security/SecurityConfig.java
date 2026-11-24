@@ -270,6 +270,14 @@ public SecurityFilterChain securityFilterChain(
                 "ADMIN"
             )
 
+         // PUBLIC
+            .requestMatchers(
+                "/api/auth/**",
+                "/api/chat",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/v3/api-docs/**"
+            ).permitAll()
             // =================================================
             // EVERYTHING ELSE
             // =================================================
