@@ -32,7 +32,7 @@ function Chatbot() {
     try {
       // Send message to Spring Boot backend
       const response = await axios.post(
-        "http://localhost:8080/api/chat",
+        "http://localhost:8080/food/api/chat",
         {
           message: message,
         }
