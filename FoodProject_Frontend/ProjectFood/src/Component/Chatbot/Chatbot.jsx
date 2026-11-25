@@ -167,12 +167,7 @@ function Chatbot() {
               disabled={loading}
             />
 
-            <button
-              type="submit"
-              disabled={loading || !input.trim()}
-            >
-              ➤
-            </button>
+           
           </form>
 
         </div>
